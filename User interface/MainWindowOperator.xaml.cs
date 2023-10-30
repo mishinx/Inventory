@@ -23,6 +23,8 @@ namespace Wpf_Inventarium
         public MainWindowOperator()
         {
             InitializeComponent();
+            this.MinWidth = 816;
+            this.MinHeight = 470;
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -37,33 +39,27 @@ namespace Wpf_Inventarium
 
         private void buttonHomePage_Click(object sender, RoutedEventArgs e)
         {
-            // Handle the click event for Option 1 here
-            MessageBox.Show("buttonHomePage_Click Clicked");
+            CloseMenu();
         }
 
         private void buttonYourProfile_Click(object sender, RoutedEventArgs e)
         {
-            // Handle the click event for Option 2 here
-            MessageBox.Show("buttonYourProfile_Click Clicked");
+
+            EditProfileWindow win = new EditProfileWindow();
+            win.Show();
             CloseMenu();
         }
 
-        private void buttonEmployes_Click(object sender, RoutedEventArgs e)
-        {
-            // Handle the click event for Option 3 here
-            MessageBox.Show("buttonEmployes_Click Clicked");
-            CloseMenu();
-        }
         private void buttonSettings_Click(object sender, RoutedEventArgs e)
         {
-            // Handle the click event for Option 4 here
-            MessageBox.Show("buttonSettings_Click Clicked");
+
+            MessageBox.Show("buttonExit_Click Clicked");
             CloseMenu();
         }
 
         private void CloseMenu()
         {
-            MenuPopup.IsOpen = false; // Close the menu
+            MenuPopup.IsOpen = false; 
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)

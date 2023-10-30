@@ -23,6 +23,8 @@ namespace Wpf_Inventarium
         public MainWindowAdmin()
         {
             InitializeComponent();
+            this.MinWidth = 816; 
+            this.MinHeight = 470;
         }
            
         private void Window_Closed(object sender, EventArgs e)
@@ -37,21 +39,24 @@ namespace Wpf_Inventarium
 
         private void buttonHomePage_Click(object sender, RoutedEventArgs e)
         {
-            
-            MessageBox.Show("buttonHomePage_Click Clicked");
+            CloseMenu();
         }
 
         private void buttonYourProfile_Click(object sender, RoutedEventArgs e)
         {
-            
-            MessageBox.Show("buttonYourProfile_Click Clicked");
+
+            EditProfileWindow win = new EditProfileWindow();
+            win.Show();
             CloseMenu();
         }
 
         private void buttonEmployes_Click(object sender, RoutedEventArgs e)
         {
-            
-            MessageBox.Show("buttonEmployes_Click Clicked");
+            this.Hide();
+            MainWindowEmployes win = new MainWindowEmployes();
+            win.Height = this.ActualHeight;
+            win.Width = this.ActualWidth;
+            win.Show();
             CloseMenu();
         }
         private void buttonSettings_Click(object sender, RoutedEventArgs e)
