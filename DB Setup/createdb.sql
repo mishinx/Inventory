@@ -36,5 +36,6 @@ CREATE TABLE operators (
     full_name text,
     phone_number text,
     warehouse_id_ref integer REFERENCES warehouses(warehouse_id),
-    admin_id_ref integer REFERENCES administrators(admin_id)
+    admin_id_ref integer REFERENCES administrators(admin_id),
+    Photo bytea
 );
