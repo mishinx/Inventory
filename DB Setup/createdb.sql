@@ -1,4 +1,4 @@
-﻿-- Створення таблиці адміністраторів
+-- Створення таблиці адміністраторів
 CREATE TABLE administrators (
     admin_id serial PRIMARY KEY,
     company_name text,
@@ -12,7 +12,7 @@ CREATE TABLE administrators (
 CREATE TABLE warehouses (
     warehouse_id serial PRIMARY KEY,
     addres text,
-    admins_id integer REFERENCES administrators(admin_id)
+    admin_id_ref integer REFERENCES administrators(admin_id)
 );
 
 -- Створення таблиці товарів
@@ -24,7 +24,7 @@ CREATE TABLE goods (
     short_description text,
     quantity integer,
     price numeric(10, 2),
-    warehouses_id integer REFERENCES warehouses(warehouse_id),
+    warehouse_id_ref integer REFERENCES warehouses(warehouse_id),
     Photo bytea
 );
 
@@ -32,9 +32,9 @@ CREATE TABLE goods (
 CREATE TABLE operators (
     operator_id serial PRIMARY KEY ,
     email_address text,
-    admin_password text,
+    operator_password text,
     full_name text,
     phone_number text,
-    warehouses_id integer REFERENCES warehouses(warehouse_id),
-    admins_id integer REFERENCES administrators(admin_id)
+    warehouse_id_ref integer REFERENCES warehouses(warehouse_id),
+    admin_id_ref integer REFERENCES administrators(admin_id)
 );
