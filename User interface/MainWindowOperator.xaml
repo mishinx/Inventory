@@ -123,42 +123,59 @@
     </Window.Resources>
     <Grid>
         <Grid HorizontalAlignment="Stretch" Height="56" VerticalAlignment="Top"  Background="White" Margin="0,0,17,0" Panel.ZIndex="1">
-            <Button x:Name="buttonFilter" Style="{DynamicResource ButtonStyleCircle}" Margin="0,8,10,0" VerticalAlignment="Top" Background="White" BorderThickness="0,0,0,0" Height="40" Panel.ZIndex="1" HorizontalAlignment="Right" Width="40">
-                <Image x:Name="imageFilter" Source="C:\Users\mishi\source\repos\app\Wpf_Inventarium\filter.png" HorizontalAlignment="Right" VerticalAlignment="Top" Height="32" Width="32" />
-            </Button>
+            <ToggleButton x:Name="toggleButtonFilter" Style="{DynamicResource ToggleButtonStyleCircle}" Margin="0,8,10,0" VerticalAlignment="Top" Background="White" BorderThickness="0,0,0,0" Height="40" Panel.ZIndex="1" HorizontalAlignment="Right" Width="40" Checked="ToggleButtonFilter_Checked">
+                <Image x:Name="imageFilter" Source="./icons/filter.png" HorizontalAlignment="Right" VerticalAlignment="Top" Height="32" Width="32" />
+            </ToggleButton>
+            <Popup x:Name="FilterPopup" PlacementTarget="{Binding ElementName=toggleButtonFilter}" StaysOpen="False" Panel.ZIndex="1" Placement="Bottom" HorizontalOffset="-100">
+                <Border x:Name="borderDropDownFilter" Background="White" BorderBrush="Black" BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="5">
+                            <Button x:Name="buttonFromAtoZ" Content="А-Я" Background="White" BorderThickness="0,1,0,1" Panel.ZIndex="1" Margin="0,0,0,0" Height="60" Width="60" Click="buttonFromAtoZ_Click"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="5">
+                            <Button x:Name="buttonFromZtoA" Content="Я-А" Background="White" BorderThickness="0,1,0,1" Panel.ZIndex="1" Margin="0,0,0,0" Height="60" Width="60" Click="buttonFromZtoA_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Popup>
             <Border x:Name="borderSearchLine" BorderThickness="1" BorderBrush="Black" CornerRadius="10" Margin="61,14,60,0" Panel.ZIndex="1" Height="28" VerticalAlignment="Top">
                 <Grid x:Name="gridSearchLine">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image x:Name="imageMagnifyingGlass" Source="C:\Users\mishi\source\repos\app\Wpf_Inventarium\magnifying_glass.png" Height="22" VerticalAlignment="Center" Margin="0,0,5,0" />
-                    <TextBox x:Name="SearchTextBox" Background="Transparent" BorderThickness="0" Padding="5" Text="Пошук" TextWrapping="Wrap" FontSize="13" Grid.ColumnSpan="2" Margin="28,-1,0,-1" Panel.ZIndex="1" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" Foreground="Gray" />
+                    <Image x:Name="imageMagnifyingGlass" Source="./icons/magnifying_glass.png" Height="22" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <TextBox x:Name="SearchTextBox" Background="Transparent" BorderThickness="0" Padding="5" Text="Пошук" TextWrapping="Wrap" FontSize="13" Grid.ColumnSpan="2" Margin="28,-1,0,-1" Panel.ZIndex="1" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" KeyDown="SearchTextBox_KeyDown" Foreground="Gray" />
                 </Grid>
             </Border>
         </Grid>
 
         <Grid x:Name="gridMenu" HorizontalAlignment="Left" Width="40" Margin="11,0,0,0" Panel.ZIndex="1" VerticalAlignment="Stretch">
             <ToggleButton x:Name="MenuToggleButton" Style="{DynamicResource ToggleButtonStyleCircle}" Background="White" Height="40" BorderThickness="0,0,0,0" Margin="0,8,0,0" VerticalAlignment="Top" BorderBrush="White" Panel.ZIndex="1" HorizontalAlignment="Center" Width="40" Checked="MenuToggleButton_Checked">
-                <Image x:Name="imageMenu" Source="C:\Users\mishi\source\repos\app\Wpf_Inventarium\menu.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1"/>
+                <Image x:Name="imageMenu" Source="./icons/menu.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" />
             </ToggleButton>
             <Popup x:Name="MenuPopup" PlacementTarget="{Binding ElementName=MenuToggleButton}" StaysOpen="False" Panel.ZIndex="1" Width="40" >
                 <Border x:Name="borderDropDownMenu" Background="White" BorderBrush="Black" BorderThickness="1">
                     <StackPanel x:Name="StackPanelForDropDownMenu">
                         <Button x:Name="buttonHomePage" Click="buttonHomePage_Click" Background="White" BorderThickness="0,1,0,0" Panel.ZIndex="1" Margin="0,10,0,0">
-                            <Image x:Name="imageHomePage" Source="C:\Users\mishi\source\repos\app\Wpf_Inventarium\homepage.png" Width="32" Height="32" />
+                            <Image x:Name="imageHomePage" Source="./icons/homepage.png" Width="32" Height="32" />
                         </Button>
                         <Button x:Name="buttonYourProfile" Click="buttonYourProfile_Click" Background="White" BorderThickness="0" Panel.ZIndex="1">
-                            <Image x:Name="imageYourProfile" Source="C:\Users\mishi\source\repos\app\Wpf_Inventarium\own information.png" Width="32" Height="32" />
+                            <Image x:Name="imageYourProfile" Source="./icons/own_information.png" Width="32" Height="32" />
                         </Button>
-                        <Button x:Name="buttonExit" Click="buttonSettings_Click" Background="White" BorderThickness="0,0,0,1" Panel.ZIndex="1" Margin="0,220,0,10" VerticalAlignment="Bottom">
-                            <Image x:Name="imageExit" Source="C:\Users\mishi\source\repos\app\Wpf_Inventarium\exit.png" Width="32" Height="32" />
+                        <Button x:Name="buttonSettings" Click="buttonSettings_Click" Background="White" BorderThickness="0,0,0,1" Panel.ZIndex="1" Margin="0,220,0,10" VerticalAlignment="Bottom">
+                            <Image x:Name="imageSettings" Source="./icons/logout.png" Width="32" Height="32" />
                         </Button>
                     </StackPanel>
                 </Border>
             </Popup>
         </Grid>
-
 
         <ScrollViewer x:Name="ScrollViewerForGoods">
             <StackPanel x:Name="PanelGoods" Margin="0,56,0,10"/>

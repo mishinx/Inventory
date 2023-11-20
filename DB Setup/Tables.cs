@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Bogus;
 using Npgsql;
+using BCrypt.Net;
 
 namespace DB_Setup
 {
@@ -10,25 +11,20 @@ namespace DB_Setup
     {
         public void Fill_Tables()
         {
-            // Рядок підключення до новоствореної БД в PostgreSQL
-            string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=*******;";
+            string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=bochka2004;";
             try
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
-                // Заповнення таблиці administrators
-                FillAdministratorsTable(connection, 50);
+                //FillAdministratorsTable(connection, 50);
 
-                // Заповнення таблиці warehouses
-                FillWarehousesTable(connection, 50);
+                //FillWarehousesTable(connection, 50);
 
-                // Заповнення таблиці goods
-                FillGoodsTable(connection, 50);
+                //FillGoodsTable(connection, 50);
 
-                // Заповнення таблиці operators
-                FillOperatorsTable(connection, 50);
+                FillOperatorsTable(connection, 1);
 
 
                 Console.WriteLine("Данi успiшно доданi до бази даних.");
@@ -38,7 +34,6 @@ namespace DB_Setup
             }
 
 
-            // Функція заповнення таблиці адміністраторів
             static void FillAdministratorsTable(NpgsqlConnection connection, int count)
             {
                 var faker = new Bogus.Faker();
@@ -48,21 +43,24 @@ namespace DB_Setup
                     {
                         command.Parameters.Clear();
                         command.Parameters.AddWithValue("@companyName", faker.Company.CompanyName());
-                        command.Parameters.AddWithValue("@email", faker.Internet.Email());
-                        command.Parameters.AddWithValue("@password", faker.Internet.Password());
+                        command.Parameters.AddWithValue("@email", faker.Internet.Email()); 
+                            
+                        string plainPassword = faker.Internet.Password();
+                        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
+                        command.Parameters.AddWithValue("@password", hashedPassword);
                         command.Parameters.AddWithValue("@fullName", faker.Name.FullName());
                         command.Parameters.AddWithValue("@phone", faker.Phone.PhoneNumber());
 
                         command.ExecuteNonQuery();
+                        if (i == 0) { Console.WriteLine(plainPassword); }
                     }
                 }
             }
 
-            // Функція заповнення таблиці складів
             static void FillWarehousesTable(NpgsqlConnection connection, int count)
             {
                 var faker = new Bogus.Faker();
-                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO warehouses (addres, admins_id) VALUES (@address, @adminId)", connection))
+                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO warehouses (addres, admin_id_ref) VALUES (@address, @adminId)", connection))
                 {
                     for (int i = 0; i < count; i++)
                     {
@@ -75,11 +73,10 @@ namespace DB_Setup
                 }
             }
 
-            // Функція заповнення таблиці товарів
             static void FillGoodsTable(NpgsqlConnection connection, int count)
             {
                 var faker = new Bogus.Faker();
-                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO goods (full_name, category, subcategory, short_description, quantity, price, warehouses_id) VALUES (@fullName, @category, @subcategory, @description, @quantity, @price, @warehouseId)", connection))
+                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO goods (full_name, category, subcategory, short_description, quantity, price, warehouse_id_ref) VALUES (@fullName, @category, @subcategory, @description, @quantity, @price, @warehouseId)", connection))
                 {
                     for (int i = 0; i < count; i++)
                     {
@@ -90,31 +87,34 @@ namespace DB_Setup
                         command.Parameters.AddWithValue("@description", faker.Lorem.Sentence());
                         command.Parameters.AddWithValue("@quantity", faker.Random.Number(1, 100));
                         command.Parameters.AddWithValue("@price", faker.Random.Decimal(1, 1000));
-                        command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count)); // Випадковий warehouse_id
-                                                                                                        //command.Parameters.AddWithValue("@photo", null); // Фото можна додати як bytea, але це поза обсягом цього прикладу
+                        command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count)); 
+                        //command.Parameters.AddWithValue("@photo", null);
 
                         command.ExecuteNonQuery();
                     }
                 }
             }
 
-            // Функція заповнення таблиці операторів
             static void FillOperatorsTable(NpgsqlConnection connection, int count)
                 {
                     var faker = new Bogus.Faker();
-                    using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO operators (email_address, admin_password, full_name, phone_number, warehouses_id, admins_id) VALUES (@email, @password, @fullName, @phone, @warehouseId, @adminId)", connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO operators (email_address, operator_password, full_name, phone_number, warehouse_id_ref, admin_id_ref) VALUES (@email, @password, @fullName, @phone, @warehouseId, @adminId)", connection))
                     {
                         for (int i = 0; i < count; i++)
                         {
                             command.Parameters.Clear();
-                            command.Parameters.AddWithValue("@email", faker.Internet.Email());
-                            command.Parameters.AddWithValue("@password", faker.Internet.Password());
+                            command.Parameters.AddWithValue("@email", faker.Internet.Email()); 
+                            
+                            string plainPassword = faker.Internet.Password();
+                            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
+                            command.Parameters.AddWithValue("@password", hashedPassword);
                             command.Parameters.AddWithValue("@fullName", faker.Name.FullName());
                             command.Parameters.AddWithValue("@phone", faker.Phone.PhoneNumber());
-                            command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count)); // Випадковий warehouse_id
-                            command.Parameters.AddWithValue("@adminId", faker.Random.Number(1, count)); // Випадковий admin_id
+                            command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count));
+                            command.Parameters.AddWithValue("@adminId", faker.Random.Number(1, count));
 
                             command.ExecuteNonQuery();
+                            if (i == 0) { Console.WriteLine(plainPassword); }
                         }
                     }
                 }
@@ -126,25 +126,23 @@ namespace DB_Setup
         }
         public void Print_Tables()
         {
-            string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=*******;";
+            string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=bochka2004;";
 
             try { 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
-                // Виведення всіх даних з таблиці administrators
-                Console.WriteLine("Данi з таблицi administrators:");
+                Console.WriteLine("Данi з таблицi адміністраторів:");
                 DisplayDataFromTable(connection, "administrators");
 
-                // Виведення всіх даних з інших таблиць аналогічним чином
-                Console.WriteLine("Данi з таблицi warehouses:");
+                Console.WriteLine("Данi з таблицi складів:");
                 DisplayDataFromTable(connection, "warehouses");
 
-                Console.WriteLine("Данi з таблицi operators:");
+                Console.WriteLine("Данi з таблицi операторів складів:");
                 DisplayDataFromTable(connection, "operators");
 
-                Console.WriteLine("Данi з таблицi goods:");
+                Console.WriteLine("Данi з таблицi товарів:");
                 DisplayDataFromTable(connection, "goods");
 
                 connection.Close();

@@ -73,7 +73,9 @@ namespace Inventory_Context
         }
     }
 
-    public class Administrator
+    public interface IEmployee
+    { }
+    public class Administrator :IEmployee
     {
         public int admin_id { get; set; }
         public string company_name { get; set; }
@@ -102,7 +104,7 @@ namespace Inventory_Context
         public byte[] photo { get; set; }
     }
 
-    public partial class Operator
+    public partial class Operator : IEmployee
     {
         public int operator_id { get; set; }
         public string email_address { get; set; }

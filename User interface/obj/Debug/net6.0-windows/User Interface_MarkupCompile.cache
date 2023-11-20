@@ -1,0 +1,20 @@
+﻿User Interface
+
+
+winexe
+C#
+.cs
+D:\UNI\PI Project\DB Setup\User Interface\obj\Debug\net6.0-windows\
+User_Interface
+none
+false
+TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+D:\UNI\PI Project\DB Setup\User Interface\App.xaml
+14-1184898484
+
+16-903851367
+223-1403882600
+AddEmployeeWindow.xaml;AddGoods.xaml;AddGoodsWindow.xaml;CreateAdminWindow.xaml;CreateWindow.xaml;EditGoodsWindow.xaml;EditProfileAdminWindow.xaml;EditProfileOperatorWindow.xaml;EditProfileWindow.xaml;MainWindow.xaml;MainWindowAdmin.xaml;MainWindowEmployes.xaml;MainWindowOperator.xaml;QRCodeWindow.xaml;
+
+False
+

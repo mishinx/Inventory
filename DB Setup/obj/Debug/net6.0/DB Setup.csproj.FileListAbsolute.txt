@@ -1,0 +1,28 @@
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\DB Setup.exe
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\DB Setup.deps.json
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\DB Setup.runtimeconfig.json
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\DB Setup.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\DB Setup.pdb
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\Bogus.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\Faker.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\Faker.Net.6.0.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\Npgsql.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\de-DE\Faker.Net.6.0.resources.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\UNI\PI Project\DB Setup\DB Setup\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.csproj.AssemblyReference.cache
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.GeneratedMSBuildEditorConfig.editorconfig
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.AssemblyInfoInputs.cache
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.AssemblyInfo.cs
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.csproj.CoreCompileInputs.cache
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.csproj.CopyComplete
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.dll
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\refint\DB Setup.dll
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.pdb
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\DB Setup.genruntimeconfig.cache
+D:\UNI\PI Project\DB Setup\DB Setup\obj\Debug\net6.0\ref\DB Setup.dll

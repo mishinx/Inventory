@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="AddGoodsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="EditGoodsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MainWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MainWindowOperator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="QRCodeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AddGoodsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="EditGoodsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindowOperator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="QRCodeWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

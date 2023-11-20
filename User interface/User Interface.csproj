@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>User_Interface</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons\add.png" />
+    <None Remove="icons\edit.png" />
+    <None Remove="icons\employee_icon.png" />
+    <None Remove="icons\employee_statistics.png" />
+    <None Remove="icons\filter.png" />
+    <None Remove="icons\homepage.png" />
+    <None Remove="icons\info.png" />
+    <None Remove="icons\logout.png" />
+    <None Remove="icons\magnifying_glass.png" />
+    <None Remove="icons\menu.png" />
+    <None Remove="icons\minus.png" />
+    <None Remove="icons\own_information.png" />
+    <None Remove="icons\plus.png" />
+    <None Remove="icons\settings.png" />
+    <None Remove="icons\Trash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net" Version="0.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons\add.png" />
+    <Resource Include="icons\edit.png" />
+    <Resource Include="icons\employee_icon.png" />
+    <Resource Include="icons\employee_statistics.png" />
+    <Resource Include="icons\filter.png" />
+    <Resource Include="icons\homepage.png" />
+    <Resource Include="icons\info.png" />
+    <Resource Include="icons\logout.png" />
+    <Resource Include="icons\magnifying_glass.png" />
+    <Resource Include="icons\menu.png" />
+    <Resource Include="icons\minus.png" />
+    <Resource Include="icons\own_information.png" />
+    <Resource Include="icons\plus.png" />
+    <Resource Include="icons\settings.png" />
+    <Resource Include="icons\Trash.png" />
+  </ItemGroup>
+
+</Project>
