@@ -29,4 +29,8 @@
     <ProjectReference Include="..\DB Setup\DB.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="StyleCopAnalyzersDefault.ruleset" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

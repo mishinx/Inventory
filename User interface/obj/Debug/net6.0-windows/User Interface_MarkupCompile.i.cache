@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\UNI\PI Project\DB Setup\User Interface\obj\Debug\net6.0-windows\
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\
 User_Interface
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+D:\UNI\PI Project\PI\Inventory\User Interface\App.xaml
+11232140707
 
-12-1482149135
-
-15198910240
-223-1403882600
-AddEmployeeWindow.xaml;AddGoods.xaml;AddGoodsWindow.xaml;CreateWindow.xaml;EditGoodsWindow.xaml;EditProfileAdminWindow.xaml;EditProfileOperatorWindow.xaml;MainWindow.xaml;MainWindowAdmin.xaml;MainWindowEmployes.xaml;MainWindowOperator.xaml;QRCodeWindow.xaml;
+151856824208
+223-140916726
+AddEmployeeWindow.xaml;AddGoods.xaml;CreateWindow.xaml;EditGoodsWindow.xaml;EditProfileAdminWindow.xaml;EditProfileOperatorWindow.xaml;MainWindow.xaml;MainWindowAdmin.xaml;MainWindowEmployees.xaml;MainWindowOperator.xaml;QRCodeWindow.xaml;
 
 False
 

@@ -53,7 +53,7 @@ namespace Wpf_Inventarium
 
         private void EmployeesButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindowEmployes win = new MainWindowEmployes();
+            MainWindowEmployees win = new MainWindowEmployees();
             win.Height = this.ActualHeight;
             win.Width = this.ActualWidth;
             win.Show();

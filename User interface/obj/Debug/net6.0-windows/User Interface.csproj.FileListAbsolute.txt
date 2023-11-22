@@ -121,3 +121,21 @@ D:\UNI\PI Project\DB Setup\User Interface\obj\Debug\net6.0-windows\EditProfileAd
 D:\UNI\PI Project\DB Setup\User Interface\obj\Debug\net6.0-windows\EditProfileOperatorWindow.g.cs
 D:\UNI\PI Project\DB Setup\User Interface\obj\Debug\net6.0-windows\EditProfileAdminWindow.baml
 D:\UNI\PI Project\DB Setup\User Interface\obj\Debug\net6.0-windows\EditProfileOperatorWindow.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.csproj.AssemblyReference.cache
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\AddEmployeeWindow.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\AddGoods.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\CreateWindow.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\EditGoodsWindow.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\EditProfileAdminWindow.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\EditProfileOperatorWindow.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\MainWindow.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\MainWindowAdmin.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\MainWindowEmployees.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\MainWindowOperator.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\QRCodeWindow.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\App.g.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface_MarkupCompile.cache
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface_MarkupCompile.lref
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\refint\User Interface.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.pdb

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "b4SV2auTqIGvJcI1M57H3GawQIplifGt6ymJDyVci6o4liJDS6YrWRG53EMar/X2KK+JuUhs8q3Wc73GDjKcTg==",
+  "dgSpecHash": "hEd0cOCFnYK6kpokxlvbpdyAdkiFPLT0BJ7wVkcE84EW7cEO/i6Yi0qOPR8atHiNhecfkPcR0DYFwLMqMLptjQ==",
   "success": true,
-  "projectFilePath": "D:\\UNI\\PI Project\\DB Setup\\User Interface\\User Interface.csproj",
+  "projectFilePath": "D:\\UNI\\PI Project\\PI\\Inventory\\User Interface\\User Interface.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tarik\\.nuget\\packages\\bcrypt.net\\0.1.0\\bcrypt.net.0.1.0.nupkg.sha512",
     "C:\\Users\\tarik\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",

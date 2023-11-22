@@ -2176,11 +2176,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\UNI\\PI Project\\DB Setup\\BusinessLogic\\BusinessLogic.csproj",
+      "projectUniqueName": "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
-      "projectPath": "D:\\UNI\\PI Project\\DB Setup\\BusinessLogic\\BusinessLogic.csproj",
+      "projectPath": "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\BusinessLogic.csproj",
       "packagesPath": "C:\\Users\\tarik\\.nuget\\packages\\",
-      "outputPath": "D:\\UNI\\PI Project\\DB Setup\\BusinessLogic\\obj\\",
+      "outputPath": "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2201,8 +2201,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\UNI\\PI Project\\DB Setup\\DB Setup\\DB.csproj": {
-              "projectPath": "D:\\UNI\\PI Project\\DB Setup\\DB Setup\\DB.csproj"
+            "D:\\UNI\\PI Project\\PI\\Inventory\\DB Setup\\DB.csproj": {
+              "projectPath": "D:\\UNI\\PI Project\\PI\\Inventory\\DB Setup\\DB.csproj"
             }
           }
         }

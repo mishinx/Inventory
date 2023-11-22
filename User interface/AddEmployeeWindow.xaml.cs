@@ -28,7 +28,7 @@ namespace Wpf_Inventarium
         GoodsRepository goods_repo = new GoodsRepository();
         private List<string> subcategories;
         Operator new_operator = new Operator();
-        public MainWindowEmployes ParentMainWindowEmployee { get; set; }
+        public MainWindowEmployees ParentMainWindowEmployee { get; set; }
         public AddEmployeeWindow()
         {
             GoodsService goods_service = new GoodsService(goods_repo);

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lFpcR0vZnqFCWbTfg74wSTnMYWfcMKgOQqxI35C6G66bALEApzLDPOGViKHPFd0T6GblwsT1HrH15JmKmPiwfA==",
+  "dgSpecHash": "dBtAG0nITfcLuEYItwd2U5+Q9LX/AFnf/Qww/XwlLa2o3plyj+h1TNl8eVY4c/jVhTv7U9p9yPRQudhC8K5VRQ==",
   "success": true,
-  "projectFilePath": "D:\\UNI\\PI Project\\DB Setup\\BusinessLogic\\BusinessLogic.csproj",
+  "projectFilePath": "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tarik\\.nuget\\packages\\bcrypt.net\\0.1.0\\bcrypt.net.0.1.0.nupkg.sha512",
     "C:\\Users\\tarik\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",

@@ -58,4 +58,8 @@
     <Resource Include="icons\Trash.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="StyleCopAnalyzersDefault.ruleset" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
