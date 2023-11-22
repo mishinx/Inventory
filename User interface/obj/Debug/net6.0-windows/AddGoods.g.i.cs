@@ -221,7 +221,7 @@ namespace Wpf_Inventarium {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/User Interface;V1.0.0.0;component/addgoods.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/User Interface;component/addgoods.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\AddGoods.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

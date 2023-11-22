@@ -237,7 +237,7 @@ namespace Wpf_Inventarium {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/User Interface;V1.0.0.0;component/editgoodswindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/User Interface;component/editgoodswindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\EditGoodsWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -51,6 +51,7 @@ namespace Wpf_Inventarium
             }
             else if (admin_service.RegisterAdministrator(companyName, username, password) != null)
             {   
+                MainWindow.username = username;
                 MessageBox.Show("Вхід в систему успішний!");
                 MainWindowAdmin win = new MainWindowAdmin();
                 Close();

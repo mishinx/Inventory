@@ -12,7 +12,7 @@ using Microsoft.Win32;
 using BusinessLogic;
 using DB;
 using Inventory_Context;
-
+using DB_Setup;
 
 namespace Wpf_Inventarium
 {

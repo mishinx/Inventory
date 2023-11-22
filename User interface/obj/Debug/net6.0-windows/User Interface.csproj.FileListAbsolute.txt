@@ -139,3 +139,74 @@ D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Inte
 D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.dll
 D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\refint\User Interface.dll
 D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.pdb
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\BusinessLogic.deps.json
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\BusinessLogic.runtimeconfig.json
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\DB.deps.json
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\DB.runtimeconfig.json
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\DB.exe
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\StyleCopAnalyzersDefault.ruleset
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\BusinessLogic.exe
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\User Interface.exe
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\User Interface.deps.json
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\User Interface.runtimeconfig.json
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\User Interface.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\User Interface.pdb
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\BCrypt.Net.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Bogus.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Faker.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Faker.Net.6.0.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Humanizer.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Design.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Relational.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Memory.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyModel.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Microsoft.Win32.SystemEvents.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Mono.TextTemplating.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Npgsql.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\QRCoder.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\System.Drawing.Common.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\System.Text.Encodings.Web.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\System.Text.Json.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\de-DE\Faker.Net.6.0.resources.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\BusinessLogic.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\DB.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\BusinessLogic.pdb
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\DB.pdb
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\AddEmployeeWindow.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\AddGoods.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\CreateWindow.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\EditGoodsWindow.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\EditProfileAdminWindow.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\EditProfileOperatorWindow.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\MainWindow.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\MainWindowAdmin.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\MainWindowEmployees.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\MainWindowOperator.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\QRCodeWindow.baml
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.g.resources
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.GeneratedMSBuildEditorConfig.editorconfig
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.AssemblyInfoInputs.cache
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.AssemblyInfo.cs
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.csproj.CoreCompileInputs.cache
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.csproj.CopyComplete
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.genruntimeconfig.cache
+D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\ref\User Interface.dll

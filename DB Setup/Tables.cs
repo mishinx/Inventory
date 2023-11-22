@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using Bogus;
 using Npgsql;
 using BCrypt.Net;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace DB_Setup
 {
@@ -15,23 +17,23 @@ namespace DB_Setup
             try
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                connection.Open();
+                {
+                    connection.Open();
 
-                //FillAdministratorsTable(connection, 50);
+                    //FillAdministratorsTable(connection, 50);
 
-                //FillWarehousesTable(connection, 50);
+                    //FillWarehousesTable(connection, 50);
 
-                //FillGoodsTable(connection, 50);
+                    FillGoodsTable(connection, 3);
 
-                FillOperatorsTable(connection, 1);
+                    //FillOperatorsTable(connection, 1);
 
 
-                Console.WriteLine("Данi успiшно доданi до бази даних.");
-                Console.WriteLine("Натиснiть будь-яку клавiшу для друку даних з таблиць...");
-                Console.ReadKey();
-                Console.WriteLine("");
-            }
+                    Console.WriteLine("Данi успiшно доданi до бази даних.");
+                    Console.WriteLine("Натиснiть будь-яку клавiшу для друку даних з таблиць...");
+                    Console.ReadKey();
+                    Console.WriteLine("");
+                }
 
 
             static void FillAdministratorsTable(NpgsqlConnection connection, int count)
@@ -66,7 +68,7 @@ namespace DB_Setup
                     {
                         command.Parameters.Clear();
                         command.Parameters.AddWithValue("@address", faker.Address.FullAddress());
-                        command.Parameters.AddWithValue("@adminId", faker.Random.Number(1, count)); // Випадковий admin_id
+                        command.Parameters.AddWithValue("@adminId", faker.Random.Number(1, count));
 
                         command.ExecuteNonQuery();
                     }
@@ -76,7 +78,7 @@ namespace DB_Setup
             static void FillGoodsTable(NpgsqlConnection connection, int count)
             {
                 var faker = new Bogus.Faker();
-                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO goods (full_name, category, subcategory, short_description, quantity, price, warehouse_id_ref) VALUES (@fullName, @category, @subcategory, @description, @quantity, @price, @warehouseId)", connection))
+                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO goods (full_name, category, subcategory, short_description, quantity, price, warehouse_id_ref, photo) VALUES (@fullName, @category, @subcategory, @description, @quantity, @price, @warehouseId, @photo)", connection))
                 {
                     for (int i = 0; i < count; i++)
                     {
@@ -87,8 +89,9 @@ namespace DB_Setup
                         command.Parameters.AddWithValue("@description", faker.Lorem.Sentence());
                         command.Parameters.AddWithValue("@quantity", faker.Random.Number(1, 100));
                         command.Parameters.AddWithValue("@price", faker.Random.Decimal(1, 1000));
-                        command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count)); 
-                        //command.Parameters.AddWithValue("@photo", null);
+                        //command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count)); 
+                        command.Parameters.AddWithValue("@warehouseId", 451); 
+                        command.Parameters.AddWithValue("@photo", ImageConverter.ConvertImageToByteArray("./icons/goods.png", ImageFormat.Png));
 
                         command.ExecuteNonQuery();
                     }
@@ -98,7 +101,7 @@ namespace DB_Setup
             static void FillOperatorsTable(NpgsqlConnection connection, int count)
                 {
                     var faker = new Bogus.Faker();
-                    using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO operators (email_address, operator_password, full_name, phone_number, warehouse_id_ref, admin_id_ref) VALUES (@email, @password, @fullName, @phone, @warehouseId, @adminId)", connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO operators (email_address, operator_password, full_name, phone_number, warehouse_id_ref, admin_id_ref, photo) VALUES (@email, @password, @fullName, @phone, @warehouseId, @adminId, @photo)", connection))
                     {
                         for (int i = 0; i < count; i++)
                         {
@@ -112,7 +115,7 @@ namespace DB_Setup
                             command.Parameters.AddWithValue("@phone", faker.Phone.PhoneNumber());
                             command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count));
                             command.Parameters.AddWithValue("@adminId", faker.Random.Number(1, count));
-
+                            command.Parameters.AddWithValue("@photo", ImageConverter.ConvertImageToByteArray("./icons/employee_icon.png", ImageFormat.Png));
                             command.ExecuteNonQuery();
                             if (i == 0) { Console.WriteLine(plainPassword); }
                         }
@@ -172,6 +175,26 @@ namespace DB_Setup
                     }
                 }
             }
+        }
+    }
+
+    public class ImageConverter
+    {
+        public static byte[] ConvertImageToByteArray(string imagePath, ImageFormat format)
+        {
+            if (!string.IsNullOrEmpty(imagePath))
+            {
+                using (Image image = Image.FromFile(imagePath))
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        image.Save(ms, format);
+                        return ms.ToArray();
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -33,7 +33,9 @@ public class AdministratorService
         {
             company_name = companyName,
             email_address = email,
-            admin_password = hashedPassword
+            admin_password = hashedPassword,
+            full_name = "My user name",
+            phone_number = "+380680000000"
         };
 
         return _administratorRepository.Create(newAdmin);

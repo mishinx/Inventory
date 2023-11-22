@@ -7,6 +7,7 @@ public class AdministratorRepository
 
     public Administrator GetAdministratorByEmail(string email)
     {
+
         return _context.administrators.FirstOrDefault(a => a.email_address == email);
     }
 

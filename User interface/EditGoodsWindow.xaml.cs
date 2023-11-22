@@ -12,6 +12,7 @@ using BusinessLogic;
 using DB;
 using Inventory_Context;
 using System.Collections.Generic;
+using DB_Setup;
 
 namespace Wpf_Inventarium
 {

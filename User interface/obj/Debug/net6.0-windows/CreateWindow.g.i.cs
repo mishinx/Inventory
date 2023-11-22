@@ -125,7 +125,7 @@ namespace Wpf_Inventarium {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/User Interface;V1.0.0.0;component/createwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/User Interface;component/createwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\CreateWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

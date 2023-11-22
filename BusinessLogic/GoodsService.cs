@@ -83,23 +83,4 @@ namespace BusinessLogic
             return sub_categories;
         }
     }
-    public class ImageConverter
-    {
-        public static byte[] ConvertImageToByteArray(string imagePath, ImageFormat format)
-        {
-            if (!string.IsNullOrEmpty(imagePath))
-            {
-                using (Image image = Image.FromFile(imagePath))
-                {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        image.Save(ms, format);
-                        return ms.ToArray();
-                    }
-                }
-            }
-
-            return null;
-        }
-    }
 }
