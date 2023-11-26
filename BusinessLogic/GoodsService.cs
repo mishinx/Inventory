@@ -1,9 +1,5 @@
-﻿using QRCoder;
-using System.Drawing;
-using DB;
+﻿using DB;
 using Inventory_Context;
-using System.Drawing.Imaging;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic
 {
