@@ -1,9 +1,9 @@
-﻿using QRCoder;
+﻿using Inventory_Context;
+using QRCoder;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using Inventory_Context;
 
 namespace Wpf_Inventarium
 {
@@ -12,7 +12,7 @@ namespace Wpf_Inventarium
         public QRCodeWindow(Goods goods_for_qrcode)
         {
             InitializeComponent();
-        
+
             var qrCodeData = MyQRCodeGenerator.GenerateQRCode(goods_for_qrcode);
             var qrCodeBitmap = new BitmapImage();
 
