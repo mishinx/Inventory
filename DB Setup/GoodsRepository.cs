@@ -7,13 +7,13 @@ namespace DB
     {
         private readonly InventoryContext _context = new InventoryContext();
 
-        public void Create(Goods new_goods)
+        public virtual void Create(Goods new_goods)
         {
             _context.goods.Add(new_goods);
             _context.SaveChanges();
         }
 
-        public List<Goods> GetAllGoodsForAdministrator(int adminId)
+        public virtual List<Goods> GetAllGoodsForAdministrator(int adminId)
         {
             var goodsForAdministrator = _context.goods
             .Where(g => _context.warehouses
@@ -25,7 +25,7 @@ namespace DB
             return goodsForAdministrator;
         }
 
-        public List<Goods> GetAllGoodsForOperator(int operatorId)
+        public virtual List<Goods> GetAllGoodsForOperator(int operatorId)
         {
             var operatorRecord = _context.operators.FirstOrDefault(o => o.operator_id == operatorId);
 
@@ -43,7 +43,7 @@ namespace DB
             return new List<Goods>();
         }
 
-        public bool Update(Goods updatedGoods)
+        public virtual bool Update(Goods updatedGoods)
         {
             var goods_to_update = _context.goods.FirstOrDefault(g => g.goods_id == updatedGoods.goods_id);
             if (goods_to_update != null)
@@ -64,7 +64,7 @@ namespace DB
             return false;
         }
 
-        public bool Delete(int goodsId)
+        public virtual bool Delete(int goodsId)
         {
             var goods_to_delete = _context.goods.FirstOrDefault(g => g.goods_id == goodsId);
             if (goods_to_delete != null)
@@ -84,7 +84,7 @@ namespace DB
             return false;
         }
 
-        public List<string> GetCategoriesForAdministrator(int adminId)
+        public virtual List<string> GetCategoriesForAdministrator(int adminId)
         {
             var categories = _context.goods
             .Where(g => _context.warehouses
@@ -98,12 +98,12 @@ namespace DB
             return categories;
         }
 
-        public List<Goods> GetFilteredGoods(string searchTerm)
+        public virtual List<Goods> GetFilteredGoods(string searchTerm)
         {
             return _context.goods.Where(g => g.full_name.Contains(searchTerm)).ToList();
         }
 
-        public List<string> GetSubcategoriesForAdministrator(int adminId, string category)
+        public virtual List<string> GetSubcategoriesForAdministrator(int adminId, string category)
         {
             var subcategories = _context.goods
                 .Where(g => _context.warehouses
