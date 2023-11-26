@@ -1,9 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlClient;
-using Bogus;
-using Npgsql;
-using BCrypt.Net;
+﻿using Npgsql;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -36,69 +31,69 @@ namespace DB_Setup
                 }
 
 
-            static void FillAdministratorsTable(NpgsqlConnection connection, int count)
-            {
-                var faker = new Bogus.Faker();
-                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO administrators (company_name, email_address, admin_password, full_name, phone_number) VALUES (@companyName, @email, @password, @fullName, @phone)", connection))
+                static void FillAdministratorsTable(NpgsqlConnection connection, int count)
                 {
-                    for (int i = 0; i < count; i++)
+                    var faker = new Bogus.Faker();
+                    using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO administrators (company_name, email_address, admin_password, full_name, phone_number) VALUES (@companyName, @email, @password, @fullName, @phone)", connection))
                     {
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("@companyName", faker.Company.CompanyName());
-                        command.Parameters.AddWithValue("@email", faker.Internet.Email()); 
-                            
-                        string plainPassword = faker.Internet.Password();
-                        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
-                        command.Parameters.AddWithValue("@password", hashedPassword);
-                        command.Parameters.AddWithValue("@fullName", faker.Name.FullName());
-                        command.Parameters.AddWithValue("@phone", faker.Phone.PhoneNumber());
+                        for (int i = 0; i < count; i++)
+                        {
+                            command.Parameters.Clear();
+                            command.Parameters.AddWithValue("@companyName", faker.Company.CompanyName());
+                            command.Parameters.AddWithValue("@email", faker.Internet.Email());
 
-                        command.ExecuteNonQuery();
-                        if (i == 0) { Console.WriteLine(plainPassword); }
+                            string plainPassword = faker.Internet.Password();
+                            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
+                            command.Parameters.AddWithValue("@password", hashedPassword);
+                            command.Parameters.AddWithValue("@fullName", faker.Name.FullName());
+                            command.Parameters.AddWithValue("@phone", faker.Phone.PhoneNumber());
+
+                            command.ExecuteNonQuery();
+                            if (i == 0) { Console.WriteLine(plainPassword); }
+                        }
                     }
                 }
-            }
 
-            static void FillWarehousesTable(NpgsqlConnection connection, int count)
-            {
-                var faker = new Bogus.Faker();
-                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO warehouses (addres, admin_id_ref) VALUES (@address, @adminId)", connection))
+                static void FillWarehousesTable(NpgsqlConnection connection, int count)
                 {
-                    for (int i = 0; i < count; i++)
+                    var faker = new Bogus.Faker();
+                    using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO warehouses (addres, admin_id_ref) VALUES (@address, @adminId)", connection))
                     {
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("@address", faker.Address.FullAddress());
-                        command.Parameters.AddWithValue("@adminId", faker.Random.Number(1, count));
+                        for (int i = 0; i < count; i++)
+                        {
+                            command.Parameters.Clear();
+                            command.Parameters.AddWithValue("@address", faker.Address.FullAddress());
+                            command.Parameters.AddWithValue("@adminId", faker.Random.Number(1, count));
 
-                        command.ExecuteNonQuery();
+                            command.ExecuteNonQuery();
+                        }
                     }
                 }
-            }
 
-            static void FillGoodsTable(NpgsqlConnection connection, int count)
-            {
-                var faker = new Bogus.Faker();
-                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO goods (full_name, category, subcategory, short_description, quantity, price, warehouse_id_ref, photo) VALUES (@fullName, @category, @subcategory, @description, @quantity, @price, @warehouseId, @photo)", connection))
+                static void FillGoodsTable(NpgsqlConnection connection, int count)
                 {
-                    for (int i = 0; i < count; i++)
+                    var faker = new Bogus.Faker();
+                    using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO goods (full_name, category, subcategory, short_description, quantity, price, warehouse_id_ref, photo) VALUES (@fullName, @category, @subcategory, @description, @quantity, @price, @warehouseId, @photo)", connection))
                     {
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("@fullName", faker.Commerce.ProductName());
-                        command.Parameters.AddWithValue("@category", faker.Commerce.Categories(1)[0]);
-                        command.Parameters.AddWithValue("@subcategory", faker.Commerce.Categories(1)[0]);
-                        command.Parameters.AddWithValue("@description", faker.Lorem.Sentence());
-                        command.Parameters.AddWithValue("@quantity", faker.Random.Number(1, 100));
-                        command.Parameters.AddWithValue("@price", faker.Random.Decimal(1, 1000));
-                        //command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count)); 
-                        command.Parameters.AddWithValue("@warehouseId", 451); 
-                        command.Parameters.AddWithValue("@photo", ImageConverter.ConvertImageToByteArray("./icons/goods.png", ImageFormat.Png));
+                        for (int i = 0; i < count; i++)
+                        {
+                            command.Parameters.Clear();
+                            command.Parameters.AddWithValue("@fullName", faker.Commerce.ProductName());
+                            command.Parameters.AddWithValue("@category", faker.Commerce.Categories(1)[0]);
+                            command.Parameters.AddWithValue("@subcategory", faker.Commerce.Categories(1)[0]);
+                            command.Parameters.AddWithValue("@description", faker.Lorem.Sentence());
+                            command.Parameters.AddWithValue("@quantity", faker.Random.Number(1, 100));
+                            command.Parameters.AddWithValue("@price", faker.Random.Decimal(1, 1000));
+                            //command.Parameters.AddWithValue("@warehouseId", faker.Random.Number(1, count)); 
+                            command.Parameters.AddWithValue("@warehouseId", 451);
+                            command.Parameters.AddWithValue("@photo", ImageConverter.ConvertImageToByteArray("./icons/goods.png", ImageFormat.Png));
 
-                        command.ExecuteNonQuery();
+                            command.ExecuteNonQuery();
+                        }
                     }
                 }
-            }
 
-            static void FillOperatorsTable(NpgsqlConnection connection, int count)
+                static void FillOperatorsTable(NpgsqlConnection connection, int count)
                 {
                     var faker = new Bogus.Faker();
                     using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO operators (email_address, operator_password, full_name, phone_number, warehouse_id_ref, admin_id_ref, photo) VALUES (@email, @password, @fullName, @phone, @warehouseId, @adminId, @photo)", connection))
@@ -106,8 +101,8 @@ namespace DB_Setup
                         for (int i = 0; i < count; i++)
                         {
                             command.Parameters.Clear();
-                            command.Parameters.AddWithValue("@email", faker.Internet.Email()); 
-                            
+                            command.Parameters.AddWithValue("@email", faker.Internet.Email());
+
                             string plainPassword = faker.Internet.Password();
                             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
                             command.Parameters.AddWithValue("@password", hashedPassword);
@@ -127,38 +122,41 @@ namespace DB_Setup
                 Console.WriteLine("Помилка: " + ex.Message);
             }
         }
+
         public void Print_Tables()
         {
             string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=bochka2004;";
 
-            try { 
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            try
             {
-                connection.Open();
+                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
 
-                Console.WriteLine("Данi з таблицi адміністраторів:");
-                DisplayDataFromTable(connection, "administrators");
+                    Console.WriteLine("Данi з таблицi адміністраторів:");
+                    DisplayDataFromTable(connection, "administrators");
 
-                Console.WriteLine("Данi з таблицi складів:");
-                DisplayDataFromTable(connection, "warehouses");
+                    Console.WriteLine("Данi з таблицi складів:");
+                    DisplayDataFromTable(connection, "warehouses");
 
-                Console.WriteLine("Данi з таблицi операторів складів:");
-                DisplayDataFromTable(connection, "operators");
+                    Console.WriteLine("Данi з таблицi операторів складів:");
+                    DisplayDataFromTable(connection, "operators");
 
-                Console.WriteLine("Данi з таблицi товарів:");
-                DisplayDataFromTable(connection, "goods");
+                    Console.WriteLine("Данi з таблицi товарів:");
+                    DisplayDataFromTable(connection, "goods");
 
-                connection.Close();
-            }
+                    connection.Close();
+                }
 
-            Console.WriteLine("Натиснiть будь-яку клавiшу для завершення...");
-            Console.ReadKey();
+                Console.WriteLine("Натиснiть будь-яку клавiшу для завершення...");
+                Console.ReadKey();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Помилка: " + ex.Message);
             }
         }
+
         static void DisplayDataFromTable(NpgsqlConnection connection, string tableName)
         {
             using (NpgsqlCommand command = new NpgsqlCommand($"SELECT * FROM {tableName}", connection))
