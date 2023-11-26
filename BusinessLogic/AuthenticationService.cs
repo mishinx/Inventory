@@ -24,7 +24,7 @@
                 }
                 else { return new bool[] { true, false }; }
             }
-            else if (_operator != null) 
+            else if (_operator != null)
             {
                 if (PasswordHasher.VerifyPassword(_operator.operator_password, password))
                 {
@@ -35,6 +35,7 @@
             else { return null; }
         }
     }
+
     public class PasswordHasher
     {
         public static string HashPassword(string password)
