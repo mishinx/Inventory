@@ -9,6 +9,7 @@ namespace Wpf_Inventarium
     public partial class CreateWindow : Window
     {
         AdministratorRepository admin_repo = new AdministratorRepository();
+
         public CreateWindow()
         {
             InitializeComponent();
@@ -50,7 +51,7 @@ namespace Wpf_Inventarium
                     "\nПовинен містити як мінімум 1 цифру.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (admin_service.RegisterAdministrator(companyName, username, password) != null)
-            {   
+            {
                 MainWindow.username = username;
                 MessageBox.Show("Вхід в систему успішний!");
                 MainWindowAdmin win = new MainWindowAdmin();
