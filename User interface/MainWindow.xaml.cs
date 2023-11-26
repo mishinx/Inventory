@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using BusinessLogic;
+﻿using BusinessLogic;
 using DB;
+using System.Windows;
 
 namespace Wpf_Inventarium
 {
@@ -23,7 +22,7 @@ namespace Wpf_Inventarium
             AdministratorService admin_service = new AdministratorService(admin_repo);
             OperatorService operator_service = new OperatorService(operator_repo);
             AuthenticationService authenticationService = new AuthenticationService(admin_service, operator_service);
-            
+
             if (authenticationService.AuthenticateUser(username, password) == null)
             {
                 MessageBox.Show("Поле не заповнено. Спробуйте ще раз.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -54,4 +53,3 @@ namespace Wpf_Inventarium
         }
     }
 }
-    
