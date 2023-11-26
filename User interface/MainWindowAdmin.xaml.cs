@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
+﻿using BusinessLogic;
+using DB;
+using Inventory_Context;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using DB;
-using BusinessLogic;
-using Inventory_Context;
-using System.Windows.Input;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Wpf_Inventarium
 {
@@ -35,6 +35,7 @@ namespace Wpf_Inventarium
                     AddGoodsGrid(goods);
                 }
             }
+
             this.MinWidth = 816;
             this.MinHeight = 470;
         }
@@ -87,12 +88,12 @@ namespace Wpf_Inventarium
         private void buttonFromAtoZ_Click(object sender, RoutedEventArgs e)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
-            AdministratorService admin_service =new AdministratorService(admin_repo);
+            AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
             DisplayGoods(goods.OrderBy(g => g.full_name).ToList());
             CloseMenuFilter();
         }
-        
+
         private void buttonCountFromLess_Click(object sender, RoutedEventArgs e)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
@@ -101,7 +102,7 @@ namespace Wpf_Inventarium
             DisplayGoods(goods.OrderBy(g => g.quantity).ToList());
             CloseMenuFilter();
         }
-        
+
         private void buttonPriceFromLess_Click(object sender, RoutedEventArgs e)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
@@ -110,7 +111,7 @@ namespace Wpf_Inventarium
             DisplayGoods(goods.OrderBy(g => g.price).ToList());
             CloseMenuFilter();
         }
-        
+
         private void buttonFromZtoA_Click(object sender, RoutedEventArgs e)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
@@ -119,7 +120,7 @@ namespace Wpf_Inventarium
             DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());
             CloseMenuFilter();
         }
-        
+
         private void buttonCountFromMore_Click(object sender, RoutedEventArgs e)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
@@ -218,7 +219,7 @@ namespace Wpf_Inventarium
             Button button = sender as Button;
             Goods goods_to_edit = button.Tag as Goods;
             EditGoodsWindow win = new EditGoodsWindow(goods_to_edit);
-            win.ParentMainWindowAdmin = this;   
+            win.ParentMainWindowAdmin = this;
             win.Show();
         }
 
@@ -230,7 +231,7 @@ namespace Wpf_Inventarium
 
             tag.GoodsObject.quantity--;
 
-            if (tag.GoodsObject.quantity < 0)
+            if (tag.GoodsObject.quantity <= 0)
             {
                 tag.GoodsObject.quantity = 0;
             }
@@ -268,7 +269,6 @@ namespace Wpf_Inventarium
             Grid gridObject = new Grid();
             gridObject.HorizontalAlignment = HorizontalAlignment.Stretch;
 
-
             Border imageGoodsBorder = new Border();
             imageGoodsBorder.Width = 112;
             imageGoodsBorder.Height = 112;
@@ -283,12 +283,10 @@ namespace Wpf_Inventarium
 
             imageGoodsBorder.Child = imageGoods;
 
-
             Label labelDescription = new Label();
             labelDescription.Content = goods.full_name + "\n" + goods.short_description;
             labelDescription.Width = double.NaN;
             labelDescription.Height = imageGoodsBorder.Height;
-
 
             Border labelDescriptionBorder = new Border();
             labelDescriptionBorder.Height = labelDescription.Height;
@@ -297,15 +295,12 @@ namespace Wpf_Inventarium
             labelDescriptionBorder.BorderThickness = new Thickness(0, 1, 1, 1);
             labelDescriptionBorder.BorderBrush = Brushes.Black;
 
-
             labelDescriptionBorder.Child = labelDescription;
-
 
             Grid gridLabelButtons = new Grid();
             gridLabelButtons.HorizontalAlignment = HorizontalAlignment.Stretch;
             gridLabelButtons.Margin = new Thickness(0, 0, 0, 0);
             gridLabelButtons.Children.Add(labelDescriptionBorder);
-
 
             Button buttonEdit = new Button();
             Image imageEdit = new Image();
@@ -340,7 +335,6 @@ namespace Wpf_Inventarium
             buttonMinus.Style = (Style)FindResource("ButtonStyleCircle");
             buttonMinus.Click += ButtonMinus_Click;
 
-
             Button buttonPlus = new Button();
             Image imagePlus = new Image();
             imagePlus.Source = new BitmapImage(new Uri("pack://application:,,,/icons/plus.png"));
@@ -356,7 +350,6 @@ namespace Wpf_Inventarium
             buttonPlus.BorderThickness = new Thickness(0);
             buttonPlus.Style = (Style)FindResource("ButtonStyleCircle");
             buttonPlus.Click += ButtonPlus_Click;
-
 
             Label CountText = new Label();
             CountText.Content = "К-сть:";
@@ -410,6 +403,7 @@ namespace Wpf_Inventarium
             PanelGoods.Children.Add(gridObject);
 
         }
+
         private ImageSource ConvertByteArrayToImage(byte[] byteArrayIn)
         {
             using (MemoryStream ms = new MemoryStream(byteArrayIn))
@@ -422,9 +416,11 @@ namespace Wpf_Inventarium
                 return image;
             }
         }
+
         public class GoodsButtonTag
         {
             public Label CountLabel { get; set; }
+
             public Goods GoodsObject { get; set; }
         }
     }
