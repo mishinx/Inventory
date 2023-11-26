@@ -1,18 +1,18 @@
-﻿using System;
+﻿using BusinessLogic;
+using DB;
+using DB_Setup;
+using Inventory_Context;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.IO;
-using Microsoft.Win32;
-using BusinessLogic;
-using DB;
-using Inventory_Context;
-using DB_Setup;
 
 namespace Wpf_Inventarium
 {
@@ -23,16 +23,17 @@ namespace Wpf_Inventarium
     public partial class AddGoods : Window
     {
         AdministratorRepository admin_repo = new AdministratorRepository();
-        OperatorRepository operator_repo = new OperatorRepository();
         WarehouseRepository warehouse_repo = new WarehouseRepository();
         GoodsRepository goods_repo = new GoodsRepository();
         private List<string> subcategories;
         private Goods new_goods = new Goods();
+
         public MainWindowAdmin ParentMainWindowAdmin { get; set; }
 
         public MainWindowOperator ParentMainWindowOperator { get; set; }
+
         private string previousCategory = "Додайте чи Виберіть з існуючих";
-        
+
         public AddGoods()
         {
             GoodsService goods_service = new GoodsService(goods_repo);
@@ -45,11 +46,13 @@ namespace Wpf_Inventarium
             {
                 ComboBoxCategory.Items.Add(category);
             }
+
             ComboBoxCategory.DisplayMemberPath = ".";
             foreach (Warehouse warehouse in warehouse_service.GetWarehousesForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id))
             {
                 ComboBoxAddress.Items.Add(warehouse.addres);
             }
+
             ComboBoxAddress.DisplayMemberPath = ".";
 
             this.Closed += AddWindow_AddWindowClosed;
@@ -116,7 +119,6 @@ namespace Wpf_Inventarium
                     bool categoryChanged = selectedCategory != previousCategory;
                     if (categoryChanged)
                     {
-                        //ComboBoxSubcategory = new ComboBox();
                         subcategories = new List<string>();
                         previousCategory = selectedCategory;
                         subcategories = goods_service.GetSubCategoriesForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id, selectedCategory);
@@ -124,13 +126,14 @@ namespace Wpf_Inventarium
                         {
                             ComboBoxSubcategory.Items.Add(sub_category);
                         }
+
                         ComboBoxCategory.SelectedItem = selectedCategory;
                     }
                 }
             }
         }
 
-        private void ComboBox_SubcategoryChanged(object sender, SelectionChangedEventArgs e) 
+        private void ComboBox_SubcategoryChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedSubcategory = GetSelectedItemComboBoxSubcategory();
             if (selectedSubcategory == "Додати")
@@ -259,7 +262,7 @@ namespace Wpf_Inventarium
             else
             {
                 MessageBox.Show("Некоректне значення ціни.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                TextBoxPrice.Text = "";
+                TextBoxPrice.Text = string.Empty;
             }
         }
 
@@ -279,11 +282,13 @@ namespace Wpf_Inventarium
                     new_goods.quantity = quantity;
                 }
             }
+
             string selectedCategory = GetSelectedItemComboBoxCategory();
             if (selectedCategory != null)
             {
                 new_goods.category = selectedCategory;
             }
+
             string selectedSubcategory = GetSelectedItemComboBoxSubcategory();
             if (selectedSubcategory != null)
             {
@@ -309,22 +314,26 @@ namespace Wpf_Inventarium
             {
                 MessageBox.Show("Поле не заповнено. Спробуйте ще раз.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
             if (new_goods.photo == null)
             {
                 MessageBox.Show("Фото повинно бути вибране. Спробуйте ще раз.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
             GoodsService goods_service = new GoodsService(goods_repo);
             goods_service.CreateGoods(new_goods);
             if (ParentMainWindowAdmin != null)
             {
                 ParentMainWindowAdmin.AddGoodsGrid(new_goods);
             }
-            else if (ParentMainWindowOperator != null) 
+            else if (ParentMainWindowOperator != null)
             {
                 ParentMainWindowOperator.AddGoodsGrid(new_goods);
             }
+
             Close();
         }
+
         private void AddWindow_AddWindowClosed(object sender, EventArgs e)
         {
             Close();
