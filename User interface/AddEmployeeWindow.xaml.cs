@@ -1,19 +1,11 @@
 ﻿using BusinessLogic;
 using DB;
 using Inventory_Context;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Wpf_Inventarium
 {
@@ -26,9 +18,10 @@ namespace Wpf_Inventarium
         OperatorRepository operator_repo = new OperatorRepository();
         WarehouseRepository warehouse_repo = new WarehouseRepository();
         GoodsRepository goods_repo = new GoodsRepository();
-        private List<string> subcategories;
         Operator new_operator = new Operator();
+
         public MainWindowEmployees ParentMainWindowEmployee { get; set; }
+
         public AddEmployeeWindow()
         {
             GoodsService goods_service = new GoodsService(goods_repo);
@@ -36,7 +29,7 @@ namespace Wpf_Inventarium
             WarehouseService warehouse_service = new WarehouseService(warehouse_repo);
 
             InitializeComponent();
-            this.MinHeight = 335; 
+            this.MinHeight = 335;
             this.MinWidth = 266;
             foreach (Warehouse warehouse in warehouse_service.GetWarehousesForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id))
             {
@@ -49,6 +42,7 @@ namespace Wpf_Inventarium
         {
             return comboBoxWarehouse.SelectedItem.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", "");
         }
+
         private void ComboBox_Warehouse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedAddress = GetSelectedItemComboBoxWarehouse();
@@ -61,6 +55,7 @@ namespace Wpf_Inventarium
                 comboBoxWarehouse.SelectedItem = selectedAddress;
             }
         }
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
@@ -96,6 +91,7 @@ namespace Wpf_Inventarium
         {
             comboBoxWarehouse.IsEnabled = false;
         }
+
         private void checkBoxAdminPowers_Unchecked(object sender, RoutedEventArgs e)
         {
             comboBoxWarehouse.IsEnabled = true;
@@ -146,16 +142,18 @@ namespace Wpf_Inventarium
                     {
                         MessageBox.Show("Поле не заповнено. Спробуйте ще раз.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                    operator_service.RegisterOperator(new_operator.email_address, password, new_operator.full_name, new_operator.warehouse_id_ref, admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
 
+                    operator_service.RegisterOperator(new_operator.email_address, password, new_operator.full_name, new_operator.warehouse_id_ref, admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
+                    ParentMainWindowEmployee.AddEmployeesGrid(new_operator);
                     Close();
                 }
                 else
                 {
                     admin_service.RegisterAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).company_name, new_operator.email_address, password);
+                    ParentMainWindowEmployee.AddEmployeesGrid(new_operator);
                     Close();
                 }
             }
-        }        
+        }
     }
 }
