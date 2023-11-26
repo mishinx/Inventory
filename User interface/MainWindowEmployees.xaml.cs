@@ -1,14 +1,15 @@
-﻿using System;
+﻿using BusinessLogic;
+using DB;
+using Inventory_Context;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using BusinessLogic;
-using Inventory_Context;
-using DB;
-using System.IO;
-using System.Windows.Input;
 
 namespace Wpf_Inventarium
 {
@@ -28,7 +29,7 @@ namespace Wpf_Inventarium
 
             OperatorService operator_service = new OperatorService(operator_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
-            
+
             List<Operator> operator_employees = operator_service.GetAllOperatorsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
             List<Administrator> admin_employees = admin_service.GetAdministratorsByCompanyName(admin_service.GetAdministratorByEmail(MainWindow.username).company_name);
 
@@ -93,6 +94,49 @@ namespace Wpf_Inventarium
             MenuPopup.IsOpen = false;
         }
 
+        private void CloseMenuFilter()
+        {
+            FilterPopup.IsOpen = false;
+        }
+
+        private void ToggleButtonFilter_Checked(object sender, RoutedEventArgs e)
+        {
+            FilterPopup.IsOpen = true;
+        }
+
+        private void buttonFromAtoZ_Click(object sender, RoutedEventArgs e)
+        {
+            PanelEmployes.Children.Clear();
+
+            AdministratorService admin_service = new AdministratorService(admin_repo);
+            OperatorService operator_service = new OperatorService(operator_repo);
+            var operators = operator_service.GetAllOperatorsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
+            var admins = admin_service.GetAdministratorsByCompanyName(admin_service.GetAdministratorByEmail(MainWindow.username).company_name).Where(a => a.email_address != MainWindow.username).ToList();
+
+            var sortedAdmins = admins.OrderBy(a => a.full_name).Cast<IEmployee>().ToList();
+            var sortedOperators = operators.OrderBy(a => a.full_name).Cast<IEmployee>().ToList();
+            DisplayEmployees(sortedAdmins);
+            DisplayEmployees(sortedOperators);
+
+            CloseMenuFilter();
+        }
+
+        private void buttonFromZtoA_Click(object sender, RoutedEventArgs e)
+        {
+            PanelEmployes.Children.Clear();
+
+            AdministratorService admin_service = new AdministratorService(admin_repo);
+            OperatorService operator_service = new OperatorService(operator_repo);
+            var operators = operator_service.GetAllOperatorsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
+            var admins = admin_service.GetAdministratorsByCompanyName(admin_service.GetAdministratorByEmail(MainWindow.username).company_name).Where(a => a.email_address != MainWindow.username).ToList();
+
+            var sortedAdmins = admins.OrderByDescending(a => a.full_name).Cast<IEmployee>().ToList();
+            var sortedOperators = operators.OrderByDescending(a => a.full_name).Cast<IEmployee>().ToList();
+            DisplayEmployees(sortedAdmins);
+            DisplayEmployees(sortedOperators);
+            CloseMenuFilter();
+        }
+
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -122,6 +166,14 @@ namespace Wpf_Inventarium
             }
         }
 
+        private void DisplayEmployees(List<IEmployee> employees_to_display)
+        {
+            foreach (var employee in employees_to_display)
+            {
+                AddEmployeesGrid(employee);
+            }
+        }
+
         private void DisplayFilteredEmployees(string searchTerm)
         {
             OperatorService operator_service = new OperatorService(operator_repo);
@@ -131,35 +183,16 @@ namespace Wpf_Inventarium
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 var filteredOperators = operator_service.GetFilteredOperatorsForAdministrator(searchTerm, admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-                var filteredAdmins = admin_service.GetFilteredAdmins(searchTerm, admin_service.GetAdministratorByEmail(MainWindow.username).company_name);
-                foreach (var @operator in filteredOperators)
-                {
-                    AddEmployeesGrid(@operator);
-                }
-
-                foreach (var admin in filteredAdmins)
-                {
-                    if (admin.email_address != MainWindow.username)
-                    {
-                        AddEmployeesGrid(admin);
-                    }
-                }
+                var filteredAdmins = admin_service.GetFilteredAdmins(searchTerm, admin_service.GetAdministratorByEmail(MainWindow.username).company_name).Where(a => a.email_address != MainWindow.username).ToList();
+                DisplayEmployees(filteredAdmins.Cast<IEmployee>().ToList());
+                DisplayEmployees(filteredOperators.Cast<IEmployee>().ToList());
             }
             else
             {
                 var operators_for_admin = operator_service.GetAllOperatorsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-                var admins_for_admin = admin_service.GetAdministratorsByCompanyName(admin_service.GetAdministratorByEmail(MainWindow.username).company_name); 
-                foreach (var @operator in operators_for_admin)
-                {
-                    AddEmployeesGrid(@operator);
-                }
-                foreach (var admin in admins_for_admin)
-                {
-                    if (admin.email_address != MainWindow.username)
-                    {
-                        AddEmployeesGrid(admin);
-                    }
-                }
+                var admins_for_admin = admin_service.GetAdministratorsByCompanyName(admin_service.GetAdministratorByEmail(MainWindow.username).company_name).Where(a => a.email_address != MainWindow.username).ToList();
+                DisplayEmployees(admins_for_admin.Cast<IEmployee>().ToList());
+                DisplayEmployees(operators_for_admin.Cast<IEmployee>().ToList());
             }
         }
 
@@ -170,7 +203,7 @@ namespace Wpf_Inventarium
             win.Show();
         }
 
-        private void AddEmployeesGrid(IEmployee employee)
+        public void AddEmployeesGrid(IEmployee employee)
         {
             Operator operatorEmployee = employee as Operator;
 
@@ -194,7 +227,6 @@ namespace Wpf_Inventarium
 
             if (operatorEmployee != null)
             {
-                photoOperator.Source = ConvertByteArrayToImage(operatorEmployee.photo);
                 photoOperator.HorizontalAlignment = HorizontalAlignment.Center;
 
                 labelDescriptionEmployee.Content = operatorEmployee.full_name + " - " + warehouse_service.GetWarehouseById(operatorEmployee.warehouse_id_ref).addres;
@@ -235,7 +267,7 @@ namespace Wpf_Inventarium
             gridEmployee.Children.Add(gridForlabelDescriptionEmployee);
             PanelEmployes.Children.Add(gridEmployee);
         }
-    
+
         public static ImageSource ConvertByteArrayToImage(byte[] byteArrayIn)
         {
             using (MemoryStream ms = new MemoryStream(byteArrayIn))
