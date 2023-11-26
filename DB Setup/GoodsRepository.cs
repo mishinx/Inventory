@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Inventory_Context;
+﻿using Inventory_Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace DB
 {
     public class GoodsRepository
     {
         private readonly InventoryContext _context = new InventoryContext();
-        
-        public void Create(Goods new_goods)    
+
+        public void Create(Goods new_goods)
         {
             _context.goods.Add(new_goods);
             _context.SaveChanges();
@@ -39,6 +39,7 @@ namespace DB
 
                 return goodsForOperator;
             }
+
             return new List<Goods>();
         }
 
@@ -59,6 +60,7 @@ namespace DB
                     throw new Exception("Помилка при оновленні продукту.", ex);
                 }
             }
+
             return false;
         }
 
@@ -78,6 +80,7 @@ namespace DB
                     throw new Exception("Помилка при видаленні продукту.", ex);
                 }
             }
+
             return false;
         }
 
