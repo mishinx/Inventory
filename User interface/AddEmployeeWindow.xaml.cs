@@ -1,7 +1,6 @@
 ﻿using BusinessLogic;
 using DB;
 using Inventory_Context;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +34,7 @@ namespace Wpf_Inventarium
             {
                 comboBoxWarehouse.Items.Add(warehouse.addres);
             }
+
             comboBoxWarehouse.DisplayMemberPath = ".";
         }
 
@@ -151,6 +151,7 @@ namespace Wpf_Inventarium
                 {
                     admin_service.RegisterAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).company_name, new_operator.email_address, password);
                     ParentMainWindowEmployee.AddEmployeesGrid(new_operator);
+
                     Close();
                 }
             }
