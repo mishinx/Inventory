@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_Inventarium"
         mc:Ignorable="d"
-        Title="QRCodeWindow" Height="450" Width="450"
+        Title="QRCode" Height="450" Width="450"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Image x:Name="QRCodeImage" HorizontalAlignment="Center" VerticalAlignment="Center" />
