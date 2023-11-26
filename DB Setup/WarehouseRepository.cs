@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Inventory_Context;
+﻿using Inventory_Context;
 
 namespace DB
 {
