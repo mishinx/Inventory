@@ -1,6 +1,5 @@
 ﻿using BusinessLogic;
 using Inventory_Context;
-using Microsoft.EntityFrameworkCore;
 
 public class AdministratorService
 {
@@ -15,6 +14,7 @@ public class AdministratorService
     {
         return _administratorRepository.GetAdministratorByEmail(email);
     }
+
     public List<Administrator> GetAdministratorsByCompanyName(string company_name)
     {
         return _administratorRepository.GetAdministratorsByCompanyName(company_name);
@@ -34,7 +34,7 @@ public class AdministratorService
             company_name = companyName,
             email_address = email,
             admin_password = hashedPassword,
-            full_name = "My user name",
+            full_name = "New user name",
             phone_number = "+380680000000"
         };
 
