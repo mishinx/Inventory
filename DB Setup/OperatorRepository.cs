@@ -7,12 +7,12 @@ namespace DB
     {
         private readonly InventoryContext _context = new InventoryContext();
 
-        public Operator GetOperatorByEmail(string email)
+        public virtual Operator GetOperatorByEmail(string email)
         {
             return _context.operators.FirstOrDefault(o => o.email_address == email);
         }
 
-        public List<Operator> GetAllOperatorsForAdministrator(int adminId)
+        public virtual List<Operator> GetAllOperatorsForAdministrator(int adminId)
         {
             List<Operator> operatorsForAdmin = _context.operators
                 .Where(o => o.admin_id_ref == adminId)
@@ -21,13 +21,13 @@ namespace DB
             return operatorsForAdmin;
         }
 
-        public List<Operator> GetFilteredOperatorsForAdministrator(string searchTerm, int adminId)
+        public virtual List<Operator> GetFilteredOperatorsForAdministrator(string searchTerm, int adminId)
         {
             return _context.operators.Where(o => o.admin_id_ref == adminId && o.full_name.Contains(searchTerm))
                 .ToList();
         }
 
-        public bool Create(Operator _operator)
+        public virtual bool Create(Operator _operator)
         {
             bool userExists = _context.operators.Any(o => o.email_address == _operator.email_address);
 
@@ -41,7 +41,7 @@ namespace DB
             return false;
         }
 
-        public void Update(Operator _operator)
+        public virtual void Update(Operator _operator)
         {
             _context.Entry(_operator).State = EntityState.Modified;
             _context.SaveChanges();
