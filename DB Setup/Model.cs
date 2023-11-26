@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Npgsql;
 
 namespace Inventory_Context
 {
     public class InventoryContext : DbContext
     {
         public DbSet<Administrator> administrators { get; set; }
+
         public DbSet<Warehouse> warehouses { get; set; }
+
         public DbSet<Goods> goods { get; set; }
+
         public DbSet<Operator> operators { get; set; }
 
         public string DbPath { get; }
@@ -62,7 +64,7 @@ namespace Inventory_Context
                 entity.HasOne<Warehouse>()
                     .WithMany()
                     .HasForeignKey(e => e.warehouse_id_ref)
-                    .OnDelete(DeleteBehavior.Restrict); 
+                    .OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne<Administrator>()
                     .WithMany()
                     .HasForeignKey(e => e.admin_id_ref)
@@ -75,7 +77,8 @@ namespace Inventory_Context
 
     public interface IEmployee
     { }
-    public class Administrator :IEmployee
+
+    public class Administrator : IEmployee
     {
         public int admin_id { get; set; }
         public string company_name { get; set; }
