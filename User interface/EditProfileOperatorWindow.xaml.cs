@@ -1,11 +1,11 @@
-﻿using Microsoft.Win32;
+﻿using BusinessLogic;
+using DB;
+using Inventory_Context;
+using Microsoft.Win32;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using BusinessLogic;
-using DB;
-using Inventory_Context;
 
 namespace Wpf_Inventarium
 {
@@ -16,6 +16,7 @@ namespace Wpf_Inventarium
     {
         OperatorRepository operator_repo = new OperatorRepository();
         Operator operator_to_edit;
+
         public EditProfileOperatorWindow()
         {
             OperatorService operator_service = new OperatorService(operator_repo);
@@ -89,13 +90,13 @@ namespace Wpf_Inventarium
             OperatorService operator_service = new OperatorService(operator_repo);
             if (InputValidator.IsPasswordValid(passwordBox.Password))
             {
-                operator_to_edit.operator_password = PasswordHasher.HashPassword(passwordBox.Password); 
-                
+                operator_to_edit.operator_password = PasswordHasher.HashPassword(passwordBox.Password);
+
                 MessageBoxResult result = MessageBox.Show("Ви справді хочете змінити дані користувача?", "Запитання", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    operator_service.UpdateOperator(operator_to_edit); 
+                    operator_service.UpdateOperator(operator_to_edit);
                     Close();
                 }
             }
@@ -110,7 +111,7 @@ namespace Wpf_Inventarium
     }
 
     class ImageFormatter
-    { 
+    {
         public static BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
             if (byteArray == null || byteArray.Length == 0)
