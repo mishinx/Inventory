@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using Inventory_Context;
+﻿using Inventory_Context;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DB
 {
@@ -15,7 +13,7 @@ namespace DB
         }
 
         public List<Operator> GetAllOperatorsForAdministrator(int adminId)
-        {   
+        {
             List<Operator> operatorsForAdmin = _context.operators
                 .Where(o => o.admin_id_ref == adminId)
                 .ToList();
@@ -39,6 +37,7 @@ namespace DB
                 _context.SaveChanges();
                 return true;
             }
+
             return false;
         }
 
