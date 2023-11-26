@@ -1,18 +1,18 @@
-﻿using Microsoft.Win32;
+﻿using BusinessLogic;
+using DB;
+using DB_Setup;
+using Inventory_Context;
+using Microsoft.Win32;
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using BusinessLogic;
-using DB;
-using Inventory_Context;
-using System.Collections.Generic;
-using DB_Setup;
 
 namespace Wpf_Inventarium
 {
@@ -26,9 +26,11 @@ namespace Wpf_Inventarium
         GoodsRepository goods_repo = new GoodsRepository();
         List<string> subcategories;
         string previousCategory;
+
         public MainWindowAdmin ParentMainWindowAdmin { get; set; }
 
         private Goods goods_to_edit;
+
         public EditGoodsWindow(Goods goods_to_edit_)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
@@ -57,6 +59,7 @@ namespace Wpf_Inventarium
             {
                 ComboBoxCategory.Items.Add(category);
             }
+
             ComboBoxCategory.DisplayMemberPath = ".";
             foreach (Warehouse warehouse in warehouse_service.GetWarehousesForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id))
             {
@@ -64,21 +67,14 @@ namespace Wpf_Inventarium
             }
 
             ComboBoxAddress.DisplayMemberPath = ".";
-            this.Closed += EditWindow_EditWindowClosed;
+            this.Closed += EditWindow_Closed;
         }
-        private void EditWindow_EditWindowClosed(object sender, EventArgs e)
-        {
-            if (ParentMainWindowAdmin != null)
-            {
-                MainWindowAdmin refreshedMainWindowAdmin = new MainWindowAdmin();
-                refreshedMainWindowAdmin.Width = ParentMainWindowAdmin.ActualWidth;
-                refreshedMainWindowAdmin.Height = ParentMainWindowAdmin.ActualHeight;
-                refreshedMainWindowAdmin.Show();
-                ParentMainWindowAdmin.Close();
-            }
 
+        private void EditWindow_Closed(object sender, EventArgs e)
+        {
             this.Close();
         }
+
         private string GetSelectedItemComboBoxCountGoods()
         {
             return ComboBoxCountGoods.SelectedItem.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", "");
@@ -118,6 +114,7 @@ namespace Wpf_Inventarium
                 textBox.Foreground = Brushes.Gray;
             }
         }
+
         private void ComboBox_CategoryChanged(object sender, SelectionChangedEventArgs e)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
@@ -224,7 +221,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Зображення|*.jpg;*.png;*.bmp;*.gif|Усі файли|*.*";
-            
+
             byte[] imageData = goods_to_edit.photo;
 
             BitmapImage imageSource = new BitmapImage();
@@ -238,6 +235,7 @@ namespace Wpf_Inventarium
                 imageSource.StreamSource = stream;
                 imageSource.EndInit();
             }
+
             Image image = new Image();
             image.Source = imageSource;
 
@@ -289,7 +287,7 @@ namespace Wpf_Inventarium
             else
             {
                 MessageBox.Show("Некоректне значення ціни.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                TextBoxPrice.Text = ""; 
+                TextBoxPrice.Text = "";
             }
         }
 
@@ -342,21 +340,32 @@ namespace Wpf_Inventarium
             {
                 MessageBox.Show("Поле не заповнено. Спробуйте ще раз.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
             GoodsService goods_service = new GoodsService(goods_repo);
             goods_service.UpdateGoods(goods_to_edit);
+
+            if (ParentMainWindowAdmin != null)
+            {
+                MainWindowAdmin refreshedMainWindowAdmin = new MainWindowAdmin();
+                refreshedMainWindowAdmin.Width = ParentMainWindowAdmin.ActualWidth;
+                refreshedMainWindowAdmin.Height = ParentMainWindowAdmin.ActualHeight;
+                refreshedMainWindowAdmin.Show();
+                ParentMainWindowAdmin.Close();
+            }
+
             Close();
         }
 
         private void buttonTrash_Click(object sender, RoutedEventArgs e)
         {
-            GoodsService goods_service = new GoodsService(goods_repo); 
+            GoodsService goods_service = new GoodsService(goods_repo);
             MessageBoxResult result = MessageBox.Show("Ви справді хочете видалити товар?", "Запитання", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
                 goods_service.DeleteGoods(goods_to_edit.goods_id);
                 Close();
-            }         
+            }
         }
     }
 }
