@@ -1,15 +1,14 @@
-﻿using System;
+﻿using BusinessLogic;
+using DB;
+using Inventory_Context;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using BusinessLogic;
-using DB;
-using Inventory_Context;
 
 namespace Wpf_Inventarium
 {
@@ -69,7 +68,7 @@ namespace Wpf_Inventarium
         {
             MenuPopup.IsOpen = false;
         }
-        
+
         private void ToggleButtonFilter_Checked(object sender, RoutedEventArgs e)
         {
             FilterPopup.IsOpen = true;
@@ -97,6 +96,43 @@ namespace Wpf_Inventarium
             DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());
             CloseMenuFilter();
         }
+
+        private void buttonCountFromLess_Click(object sender, RoutedEventArgs e)
+        {
+            GoodsService goods_service = new GoodsService(goods_repo);
+            OperatorService operator_service = new OperatorService(operator_repo);
+            List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
+            DisplayGoods(goods.OrderBy(g => g.quantity).ToList());
+            CloseMenuFilter();
+        }
+
+        private void buttonCountFromMore_Click(object sender, RoutedEventArgs e)
+        {
+            GoodsService goods_service = new GoodsService(goods_repo);
+            OperatorService operator_service = new OperatorService(operator_repo);
+            List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
+            DisplayGoods(goods.OrderByDescending(g => g.quantity).ToList());
+            CloseMenuFilter();
+        }
+
+        private void buttonPriceFromLess_Click(object sender, RoutedEventArgs e)
+        {
+            GoodsService goods_service = new GoodsService(goods_repo);
+            OperatorService operator_service = new OperatorService(operator_repo);
+            List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
+            DisplayGoods(goods.OrderBy(g => g.price).ToList());
+            CloseMenuFilter();
+        }
+
+        private void buttonPriceFromMore_Click(object sender, RoutedEventArgs e)
+        {
+            GoodsService goods_service = new GoodsService(goods_repo);
+            OperatorService operator_service = new OperatorService(operator_repo);
+            List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
+            DisplayGoods(goods.OrderByDescending(g => g.price).ToList());
+            CloseMenuFilter();
+        }
+
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -137,7 +173,7 @@ namespace Wpf_Inventarium
         }
 
         private void DisplayFilteredGoods(string searchTerm)
-        {   
+        {
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 GoodsService goods_service = new GoodsService(goods_repo);
@@ -190,7 +226,7 @@ namespace Wpf_Inventarium
         public void AddGoodsGrid(Goods goods)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
-            
+
             Grid gridObject = new Grid();
             gridObject.HorizontalAlignment = HorizontalAlignment.Stretch;
 
