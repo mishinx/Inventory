@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_Inventarium"
         mc:Ignorable="d"
-        Title="MainWindowAdmin" Height="470" Width="816" Closed="Window_Closed"
+        Title="Головне вікно" Height="470" Width="816" Closed="Window_Closed"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="FocusVisual">
