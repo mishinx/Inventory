@@ -1,5 +1,5 @@
-﻿using Inventory_Context;
-using DB;
+﻿using DB;
+using Inventory_Context;
 
 namespace BusinessLogic
 {
