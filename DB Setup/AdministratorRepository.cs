@@ -32,12 +32,13 @@ public class AdministratorRepository
             _context.SaveChanges();
             return true;
         }
+
         return false;
     }
 
     public void Update(Administrator administrator)
     {
-            _context.Entry(administrator).State = EntityState.Modified;
-            _context.SaveChanges();
+        _context.Entry(administrator).State = EntityState.Modified;
+        _context.SaveChanges();
     }
 }
