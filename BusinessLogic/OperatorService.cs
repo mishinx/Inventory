@@ -1,6 +1,5 @@
 ﻿using DB;
 using Inventory_Context;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic
 {
@@ -17,6 +16,7 @@ namespace BusinessLogic
         {
             return _operatorRepository.GetOperatorByEmail(email);
         }
+
         public List<Operator> GetAllOperatorsForAdministrator(int adminId)
         {
             return _operatorRepository.GetAllOperatorsForAdministrator(adminId);
@@ -33,7 +33,7 @@ namespace BusinessLogic
             string relativeImagePath = "icons/employee_icon.png";
             byte[] defaultImageBytes = null;
             defaultImageBytes = File.ReadAllBytes(relativeImagePath);
-            
+
             var newOperator = new Operator
             {
                 full_name = fullName,
@@ -47,6 +47,7 @@ namespace BusinessLogic
 
             return _operatorRepository.Create(newOperator);
         }
+
         public void UpdateOperator(Operator _operator)
         {
             _operatorRepository.Update(_operator);
