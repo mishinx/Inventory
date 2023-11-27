@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\BusinessLogic.csproj": {}
+    "C:\\Users\\mishi\\source\\repos\\Inventory\\BusinessLogic\\BusinessLogic.csproj": {}
   },
   "projects": {
-    "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\BusinessLogic.csproj": {
+    "C:\\Users\\mishi\\source\\repos\\Inventory\\BusinessLogic\\BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\mishi\\source\\repos\\Inventory\\BusinessLogic\\BusinessLogic.csproj",
         "projectName": "BusinessLogic",
-        "projectPath": "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\tarik\\.nuget\\packages\\",
-        "outputPath": "D:\\UNI\\PI Project\\PI\\Inventory\\BusinessLogic\\obj\\",
+        "projectPath": "C:\\Users\\mishi\\source\\repos\\Inventory\\BusinessLogic\\BusinessLogic.csproj",
+        "packagesPath": "C:\\Users\\mishi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mishi\\source\\repos\\Inventory\\BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\tarik\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\mishi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\UNI\\PI Project\\PI\\Inventory\\DB Setup\\DB.csproj": {
-                "projectPath": "D:\\UNI\\PI Project\\PI\\Inventory\\DB Setup\\DB.csproj"
+              "C:\\Users\\mishi\\source\\repos\\Inventory\\DB Setup\\DB.csproj": {
+                "projectPath": "C:\\Users\\mishi\\source\\repos\\Inventory\\DB Setup\\DB.csproj"
               }
             }
           }
@@ -89,25 +85,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\UNI\\PI Project\\PI\\Inventory\\DB Setup\\DB.csproj": {
+    "C:\\Users\\mishi\\source\\repos\\Inventory\\DB Setup\\DB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UNI\\PI Project\\PI\\Inventory\\DB Setup\\DB.csproj",
+        "projectUniqueName": "C:\\Users\\mishi\\source\\repos\\Inventory\\DB Setup\\DB.csproj",
         "projectName": "DB",
-        "projectPath": "D:\\UNI\\PI Project\\PI\\Inventory\\DB Setup\\DB.csproj",
-        "packagesPath": "C:\\Users\\tarik\\.nuget\\packages\\",
-        "outputPath": "D:\\UNI\\PI Project\\PI\\Inventory\\DB Setup\\obj\\",
+        "projectPath": "C:\\Users\\mishi\\source\\repos\\Inventory\\DB Setup\\DB.csproj",
+        "packagesPath": "C:\\Users\\mishi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mishi\\source\\repos\\Inventory\\DB Setup\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\tarik\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\mishi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -194,7 +186,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

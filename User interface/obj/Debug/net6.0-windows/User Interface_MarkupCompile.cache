@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\
+C:\Users\mishi\source\repos\Inventory\User Interface\obj\Debug\net6.0-windows\
 User_Interface
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\UNI\PI Project\PI\Inventory\User Interface\App.xaml
+C:\Users\mishi\source\repos\Inventory\User Interface\App.xaml
 11232140707
 
 13-616060338
-217-1590376690
+21755403987
 AddEmployeeWindow.xaml;AddGoods.xaml;CreateWindow.xaml;EditGoodsWindow.xaml;EditProfileAdminWindow.xaml;EditProfileOperatorWindow.xaml;MainWindow.xaml;MainWindowAdmin.xaml;MainWindowEmployees.xaml;MainWindowOperator.xaml;QRCodeWindow.xaml;
 
 False

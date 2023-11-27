@@ -15,7 +15,7 @@ namespace Inventory_Context
         public string DbPath { get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseNpgsql("Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=bochka2004;");
+            => options.UseNpgsql("Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=12345678;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
