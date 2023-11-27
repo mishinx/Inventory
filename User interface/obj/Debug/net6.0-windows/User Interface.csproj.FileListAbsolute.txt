@@ -144,7 +144,6 @@ D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\BusinessL
 D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\DB.deps.json
 D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\DB.runtimeconfig.json
 D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\DB.exe
-D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\StyleCopAnalyzersDefault.ruleset
 D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\BusinessLogic.exe
 D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\User Interface.exe
 D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\User Interface.deps.json
@@ -210,3 +209,6 @@ D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Inte
 D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.csproj.CopyComplete
 D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\User Interface.genruntimeconfig.cache
 D:\UNI\PI Project\PI\Inventory\User Interface\obj\Debug\net6.0-windows\ref\User Interface.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Serilog.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Serilog.Sinks.File.dll
+D:\UNI\PI Project\PI\Inventory\User Interface\bin\Debug\net6.0-windows\Serilog.Sinks.Console.dll

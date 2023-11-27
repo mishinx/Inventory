@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Serilog;
 
 namespace Wpf_Inventarium
 {
@@ -21,7 +22,7 @@ namespace Wpf_Inventarium
         AdministratorRepository admin_repo = new AdministratorRepository();
         OperatorRepository operator_repo = new OperatorRepository();
         WarehouseRepository warehouse_repo = new WarehouseRepository();
-        GoodsRepository goods_repo = new GoodsRepository();
+        ILogger _logger = LoggerManager.Instance.Logger;
 
         public MainWindowEmployees()
         {
@@ -33,18 +34,8 @@ namespace Wpf_Inventarium
             List<Operator> operator_employees = operator_service.GetAllOperatorsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
             List<Administrator> admin_employees = admin_service.GetAdministratorsByCompanyName(admin_service.GetAdministratorByEmail(MainWindow.username).company_name);
 
-            foreach (var admin in admin_employees)
-            {
-                if (admin.email_address != MainWindow.username)
-                {
-                    AddEmployeesGrid(admin);
-                }
-            }
-
-            foreach (var @operator in operator_employees)
-            {
-                AddEmployeesGrid(@operator);
-            }
+            DisplayEmployees(admin_employees.Cast<IEmployee>().ToList());
+            DisplayEmployees(operator_employees.Cast<IEmployee>().ToList());
             this.MinWidth = 816;
             this.MinHeight = 470;
         }
@@ -83,6 +74,7 @@ namespace Wpf_Inventarium
 
         private void buttonSettings_Click(object sender, RoutedEventArgs e)
         {
+            _logger.Information("Користувач " + MainWindow.username + " вийшов з профілю");
             MainWindow win = new MainWindow();
             win.Show();
             Close();

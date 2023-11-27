@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Serilog;
 
 namespace Wpf_Inventarium
 {
@@ -20,10 +21,12 @@ namespace Wpf_Inventarium
     {
         AdministratorRepository admin_repo = new AdministratorRepository();
         GoodsRepository goods_repo = new GoodsRepository();
+        ILogger _logger = LoggerManager.Instance.Logger;
 
         public MainWindowAdmin()
         {
             InitializeComponent();
+            
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             if (goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id) != null)
@@ -64,6 +67,7 @@ namespace Wpf_Inventarium
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
+            _logger.Information("Користувач " + MainWindow.username + " вийшов з профілю");
             MainWindow win = new MainWindow();
             win.Show();
             Close();

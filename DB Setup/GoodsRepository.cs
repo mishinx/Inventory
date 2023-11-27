@@ -1,14 +1,17 @@
 ﻿using Inventory_Context;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace DB
 {
     public class GoodsRepository
     {
         private readonly InventoryContext _context = new InventoryContext();
+        ILogger _logger = LoggerManager.Instance.Logger;
 
         public virtual void Create(Goods new_goods)
         {
+            _logger.Information("Додано товар");
             _context.goods.Add(new_goods);
             _context.SaveChanges();
         }
@@ -45,6 +48,7 @@ namespace DB
 
         public virtual bool Update(Goods updatedGoods)
         {
+            _logger.Information("Оновлено товар" + updatedGoods.goods_id.ToString());
             var goods_to_update = _context.goods.FirstOrDefault(g => g.goods_id == updatedGoods.goods_id);
             if (goods_to_update != null)
             {
@@ -66,6 +70,7 @@ namespace DB
 
         public virtual bool Delete(int goodsId)
         {
+            _logger.Information("Видалено товар" + goodsId.ToString());
             var goods_to_delete = _context.goods.FirstOrDefault(g => g.goods_id == goodsId);
             if (goods_to_delete != null)
             {
@@ -100,6 +105,7 @@ namespace DB
 
         public virtual List<Goods> GetFilteredGoods(string searchTerm)
         {
+            _logger.Information("Пошук товару за запитом - " + searchTerm);
             return _context.goods.Where(g => g.full_name.Contains(searchTerm)).ToList();
         }
 

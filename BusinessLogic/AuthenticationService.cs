@@ -1,10 +1,12 @@
-﻿namespace BusinessLogic
+﻿using DB;
+using Serilog;
+namespace BusinessLogic
 {
     public class AuthenticationService
     {
         private readonly AdministratorService _administratorService;
         private readonly OperatorService _operatorService;
-
+        
         public AuthenticationService(AdministratorService administratorService, OperatorService operatorService)
         {
             _administratorService = administratorService;
@@ -22,7 +24,10 @@
                 {
                     return new bool[] { true, true };
                 }
-                else { return new bool[] { true, false }; }
+                else 
+                {
+                    return new bool[] { true, false }; 
+                }
             }
             else if (_operator != null)
             {

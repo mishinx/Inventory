@@ -127,3 +127,6 @@ D:\UNI\PI Project\PI\Inventory\DB Setup\obj\Debug\net6.0\ref\DB.dll
 D:\UNI\PI Project\PI\Inventory\DB Setup\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 D:\UNI\PI Project\PI\Inventory\DB Setup\bin\Debug\net6.0\System.Drawing.Common.dll
 D:\UNI\PI Project\PI\Inventory\DB Setup\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\UNI\PI Project\PI\Inventory\DB Setup\bin\Debug\net6.0\Serilog.dll
+D:\UNI\PI Project\PI\Inventory\DB Setup\bin\Debug\net6.0\Serilog.Sinks.File.dll
+D:\UNI\PI Project\PI\Inventory\DB Setup\bin\Debug\net6.0\Serilog.Sinks.Console.dll
