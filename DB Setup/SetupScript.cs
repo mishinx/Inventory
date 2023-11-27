@@ -6,7 +6,7 @@ namespace DB_Setup
     {
         public void SetupingScript()
         {
-            string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=bochka2004;";
+            string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=12345678;";
             try
             {
                 string script = File.ReadAllText("createdb.sql");
@@ -23,7 +23,7 @@ namespace DB_Setup
 
                     connection.Close();
                 }
-                connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=bochka2004;";
+                connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=12345678;";
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();

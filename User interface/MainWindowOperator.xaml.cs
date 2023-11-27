@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Serilog;
 
@@ -20,6 +21,8 @@ namespace Wpf_Inventarium
     {
         OperatorRepository operator_repo = new OperatorRepository();
         GoodsRepository goods_repo = new GoodsRepository();
+        private bool isMenuOpen = true;
+        private bool isFilterOpen = true;
         ILogger _logger = LoggerManager.Instance.Logger;
 
         public MainWindowOperator()
@@ -36,27 +39,108 @@ namespace Wpf_Inventarium
             this.MinWidth = 816;
             this.MinHeight = 470;
         }
+        private void MenuClick(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
 
+            if (isMenuOpen)
+            {
+                Anim.From = 0;
+                Anim.To = 380;
+            }
+
+            isMenuOpen = !isMenuOpen;
+            MenuPopup.BeginAnimation(HeightProperty, Anim);
+        }
+        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!isMenuOpen && !IsMouseOverPopup(e.GetPosition(MenuPopup)) && !MenuButton.IsMouseOver)
+            {
+                CloseMenu();
+            }
+            if (!isFilterOpen && !IsMouseOverFilterPopup(e.GetPosition(FilterPopup)) && !ButtonFilter.IsMouseOver)
+            {
+                CloseFilter();
+            }
+        }
+
+        private bool IsMouseOverPopup(Point mousePosition)
+        {
+            Point popupPosition = MenuPopup.PointToScreen(new Point(0, 0));
+
+            Rect popupRect = new Rect(popupPosition.X, popupPosition.Y, MenuPopup.ActualWidth, MenuPopup.ActualHeight);
+
+            return popupRect.Contains(mousePosition);
+        }
+
+        private void CloseMenu()
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+            Anim.From = 380;
+            Anim.To = 0;
+            isMenuOpen = !isMenuOpen;
+            MenuPopup.BeginAnimation(HeightProperty, Anim);
+        }
+        private void FilterClick(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+
+            if (isFilterOpen)
+            {
+                Anim.From = 0;
+                Anim.To = 143;
+            }
+
+            isFilterOpen = !isFilterOpen;
+            FilterPopup.BeginAnimation(WidthProperty, Anim);
+        }
+
+        private bool IsMouseOverFilterPopup(Point mousePosition)
+        {
+            Point popupPosition = FilterPopup.PointToScreen(new Point(0, 0));
+
+            Rect popupRect = new Rect(popupPosition.X, popupPosition.Y, FilterPopup.ActualWidth, FilterPopup.ActualHeight);
+
+            return popupRect.Contains(mousePosition);
+        }
+        private void CloseFilter()
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+            Anim.From = 143;
+            Anim.To = 0;
+            isFilterOpen = !isFilterOpen;
+            FilterPopup.BeginAnimation(WidthProperty, Anim);
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MenuPopup.IsOpen = true;
+            FilterPopup.IsOpen = true;
+        }
         private void Window_Closed(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            MenuPopup.IsOpen = true;
-        }
+        
 
         private void buttonHomePage_Click(object sender, RoutedEventArgs e)
         {
-            CloseMenu();
+            
         }
 
         private void buttonYourProfile_Click(object sender, RoutedEventArgs e)
         {
             EditProfileOperatorWindow win = new EditProfileOperatorWindow();
             win.Show();
-            CloseMenu();
+            
         }
 
         private void buttonSettings_Click(object sender, RoutedEventArgs e)
@@ -67,20 +151,11 @@ namespace Wpf_Inventarium
             Close();
         }
 
-        private void CloseMenu()
-        {
-            MenuPopup.IsOpen = false;
-        }
+        
 
-        private void ToggleButtonFilter_Checked(object sender, RoutedEventArgs e)
-        {
-            FilterPopup.IsOpen = true;
-        }
+        
 
-        private void CloseMenuFilter()
-        {
-            FilterPopup.IsOpen = false;
-        }
+        
 
         private void buttonFromAtoZ_Click(object sender, RoutedEventArgs e)
         {
@@ -88,7 +163,7 @@ namespace Wpf_Inventarium
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
             DisplayGoods(goods.OrderBy(g => g.full_name).ToList());
-            CloseMenuFilter();
+            
         }
 
         private void buttonFromZtoA_Click(object sender, RoutedEventArgs e)
@@ -97,7 +172,7 @@ namespace Wpf_Inventarium
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
             DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());
-            CloseMenuFilter();
+            
         }
 
         private void buttonCountFromLess_Click(object sender, RoutedEventArgs e)
@@ -106,7 +181,7 @@ namespace Wpf_Inventarium
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
             DisplayGoods(goods.OrderBy(g => g.quantity).ToList());
-            CloseMenuFilter();
+          
         }
 
         private void buttonCountFromMore_Click(object sender, RoutedEventArgs e)
@@ -115,7 +190,7 @@ namespace Wpf_Inventarium
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
             DisplayGoods(goods.OrderByDescending(g => g.quantity).ToList());
-            CloseMenuFilter();
+            
         }
 
         private void buttonPriceFromLess_Click(object sender, RoutedEventArgs e)
@@ -124,7 +199,7 @@ namespace Wpf_Inventarium
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
             DisplayGoods(goods.OrderBy(g => g.price).ToList());
-            CloseMenuFilter();
+            
         }
 
         private void buttonPriceFromMore_Click(object sender, RoutedEventArgs e)
@@ -133,7 +208,7 @@ namespace Wpf_Inventarium
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
             DisplayGoods(goods.OrderByDescending(g => g.price).ToList());
-            CloseMenuFilter();
+            
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
