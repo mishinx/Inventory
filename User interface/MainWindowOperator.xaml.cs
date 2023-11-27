@@ -32,13 +32,11 @@ namespace Wpf_Inventarium
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> allGoods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
 
-            foreach (var goods in allGoods)
-            {
-                AddGoodsGrid(goods);
-            }
+            DisplayGoods(allGoods);
             this.MinWidth = 816;
             this.MinHeight = 470;
         }
+
         private void MenuClick(object sender, RoutedEventArgs e)
         {
             DoubleAnimation Anim = new DoubleAnimation();
@@ -54,6 +52,7 @@ namespace Wpf_Inventarium
             isMenuOpen = !isMenuOpen;
             MenuPopup.BeginAnimation(HeightProperty, Anim);
         }
+
         private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (!isMenuOpen && !IsMouseOverPopup(e.GetPosition(MenuPopup)) && !MenuButton.IsMouseOver)
@@ -85,6 +84,7 @@ namespace Wpf_Inventarium
             isMenuOpen = !isMenuOpen;
             MenuPopup.BeginAnimation(HeightProperty, Anim);
         }
+
         private void FilterClick(object sender, RoutedEventArgs e)
         {
             DoubleAnimation Anim = new DoubleAnimation();
@@ -109,6 +109,7 @@ namespace Wpf_Inventarium
 
             return popupRect.Contains(mousePosition);
         }
+
         private void CloseFilter()
         {
             DoubleAnimation Anim = new DoubleAnimation();
@@ -119,28 +120,26 @@ namespace Wpf_Inventarium
             isFilterOpen = !isFilterOpen;
             FilterPopup.BeginAnimation(WidthProperty, Anim);
         }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MenuPopup.IsOpen = true;
             FilterPopup.IsOpen = true;
         }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             Close();
-        }
-
-        
+        }        
 
         private void buttonHomePage_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {            
         }
 
         private void buttonYourProfile_Click(object sender, RoutedEventArgs e)
         {
             EditProfileOperatorWindow win = new EditProfileOperatorWindow();
-            win.Show();
-            
+            win.Show();            
         }
 
         private void buttonSettings_Click(object sender, RoutedEventArgs e)
@@ -151,19 +150,12 @@ namespace Wpf_Inventarium
             Close();
         }
 
-        
-
-        
-
-        
-
         private void buttonFromAtoZ_Click(object sender, RoutedEventArgs e)
         {
             GoodsService goods_service = new GoodsService(goods_repo);
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
-            DisplayGoods(goods.OrderBy(g => g.full_name).ToList());
-            
+            DisplayGoods(goods.OrderBy(g => g.full_name).ToList());            
         }
 
         private void buttonFromZtoA_Click(object sender, RoutedEventArgs e)
@@ -171,8 +163,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
-            DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());
-            
+            DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());            
         }
 
         private void buttonCountFromLess_Click(object sender, RoutedEventArgs e)
@@ -180,8 +171,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
-            DisplayGoods(goods.OrderBy(g => g.quantity).ToList());
-          
+            DisplayGoods(goods.OrderBy(g => g.quantity).ToList());          
         }
 
         private void buttonCountFromMore_Click(object sender, RoutedEventArgs e)
@@ -189,8 +179,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
-            DisplayGoods(goods.OrderByDescending(g => g.quantity).ToList());
-            
+            DisplayGoods(goods.OrderByDescending(g => g.quantity).ToList());            
         }
 
         private void buttonPriceFromLess_Click(object sender, RoutedEventArgs e)
@@ -198,8 +187,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
-            DisplayGoods(goods.OrderBy(g => g.price).ToList());
-            
+            DisplayGoods(goods.OrderBy(g => g.price).ToList());            
         }
 
         private void buttonPriceFromMore_Click(object sender, RoutedEventArgs e)
@@ -207,8 +195,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             OperatorService operator_service = new OperatorService(operator_repo);
             List<Goods> goods = goods_service.GetAllGoodsForOperator(operator_service.GetOperatorByEmail(MainWindow.username).operator_id);
-            DisplayGoods(goods.OrderByDescending(g => g.price).ToList());
-            
+            DisplayGoods(goods.OrderByDescending(g => g.price).ToList());            
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)

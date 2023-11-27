@@ -36,10 +36,7 @@ namespace Wpf_Inventarium
             {
                 List<Goods> allGoods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
 
-                foreach (var goods in allGoods)
-                {
-                    AddGoodsGrid(goods);
-                }
+               DisplayGoods(allGoods);
             }
 
             this.MinWidth = 816;
@@ -92,6 +89,7 @@ namespace Wpf_Inventarium
             isMenuOpen = !isMenuOpen;
             MenuPopup.BeginAnimation(HeightProperty, Anim);
         }
+
         private void FilterClick(object sender, RoutedEventArgs e)
         {
             DoubleAnimation Anim = new DoubleAnimation();
@@ -116,6 +114,7 @@ namespace Wpf_Inventarium
 
             return popupRect.Contains(mousePosition);
         }
+
         private void CloseFilter()
         {
             DoubleAnimation Anim = new DoubleAnimation();
@@ -127,21 +126,21 @@ namespace Wpf_Inventarium
             isFilterOpen = !isFilterOpen;
             FilterPopup.BeginAnimation(WidthProperty, Anim);
         }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MenuPopup.IsOpen = true;
             FilterPopup.IsOpen = true;
         }
+
         private void HomePageButton_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {            
         }
 
         private void OwnInformationButton_Click(object sender, RoutedEventArgs e)
         {
             EditProfileAdminWindow win = new EditProfileAdminWindow();
-            win.Show();
-            
+            win.Show();            
         }
 
         private void EmployeesButton_Click(object sender, RoutedEventArgs e)
@@ -150,8 +149,7 @@ namespace Wpf_Inventarium
             win.Height = this.ActualHeight;
             win.Width = this.ActualWidth;
             win.Show();
-            Close();
-            
+            Close();            
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
@@ -159,8 +157,7 @@ namespace Wpf_Inventarium
             _logger.Information("Користувач " + MainWindow.username + " вийшов з профілю");
             MainWindow win = new MainWindow();
             win.Show();
-            Close();
-            
+            Close();            
         }
 
         private void buttonFromAtoZ_Click(object sender, RoutedEventArgs e)
@@ -168,8 +165,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderBy(g => g.full_name).ToList());
-            
+            DisplayGoods(goods.OrderBy(g => g.full_name).ToList());            
         }
 
         private void buttonCountFromLess_Click(object sender, RoutedEventArgs e)
@@ -177,8 +173,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderBy(g => g.quantity).ToList());
-            
+            DisplayGoods(goods.OrderBy(g => g.quantity).ToList());            
         }
 
         private void buttonPriceFromLess_Click(object sender, RoutedEventArgs e)
@@ -186,8 +181,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderBy(g => g.price).ToList());
-            
+            DisplayGoods(goods.OrderBy(g => g.price).ToList());            
         }
 
         private void buttonFromZtoA_Click(object sender, RoutedEventArgs e)
@@ -195,8 +189,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());
-            
+            DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());            
         }
 
         private void buttonCountFromMore_Click(object sender, RoutedEventArgs e)
@@ -204,8 +197,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderByDescending(g => g.quantity).ToList());
-            
+            DisplayGoods(goods.OrderByDescending(g => g.quantity).ToList());            
         }
 
         private void buttonPriceFromMore_Click(object sender, RoutedEventArgs e)
@@ -213,8 +205,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderByDescending(g => g.price).ToList());
-            
+            DisplayGoods(goods.OrderByDescending(g => g.price).ToList());            
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -474,7 +465,6 @@ namespace Wpf_Inventarium
             gridObject.Margin = new Thickness(0, 15, 0, 0);
 
             PanelGoods.Children.Add(gridObject);
-
         }
 
         private ImageSource ConvertByteArrayToImage(byte[] byteArrayIn)

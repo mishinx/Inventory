@@ -58,6 +58,7 @@ namespace Wpf_Inventarium
             isMenuOpen = !isMenuOpen;
             MenuPopup.BeginAnimation(HeightProperty, Anim);
         }
+
         private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (!isMenuOpen && !IsMouseOverPopup(e.GetPosition(MenuPopup)) && !MenuButton.IsMouseOver)
@@ -113,6 +114,7 @@ namespace Wpf_Inventarium
 
             return popupRect.Contains(mousePosition);
         }
+
         private void CloseFilter()
         {
             DoubleAnimation Anim = new DoubleAnimation();
@@ -123,6 +125,7 @@ namespace Wpf_Inventarium
             isFilterOpen = !isFilterOpen;
             FilterPopup.BeginAnimation(WidthProperty, Anim);
         }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MenuPopup.IsOpen = true;
@@ -133,44 +136,32 @@ namespace Wpf_Inventarium
             Close();
         }
 
-        
-
         private void buttonHomePage_Click(object sender, RoutedEventArgs e)
         {
             MainWindowAdmin win = new MainWindowAdmin();
             win.Height = this.ActualHeight;
             win.Width = this.ActualWidth;
             win.Show();
-            Close();
-           
+            Close();           
         }
 
         private void buttonYourProfile_Click(object sender, RoutedEventArgs e)
         {
             EditProfileAdminWindow win = new EditProfileAdminWindow();
-            win.Show();
-            
+            win.Show();            
         }
 
         private void buttonEmployes_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {            
         }
-
+        
         private void buttonSettings_Click(object sender, RoutedEventArgs e)
         {
             _logger.Information("Користувач " + MainWindow.username + " вийшов з профілю");
             MainWindow win = new MainWindow();
             win.Show();
-            Close();
-            
-        }
-
-        
-
-        
-
-        
+            Close();            
+        }        
 
         private void buttonFromAtoZ_Click(object sender, RoutedEventArgs e)
         {

@@ -5,6 +5,7 @@ using DB;
 using DB_Setup;
 using Inventory_Context;
 using Moq;
+using Npgsql;
 using System.Drawing.Imaging;
 
 namespace BLL_Tests
@@ -437,6 +438,39 @@ namespace BLL_Tests
             var result = service.GetSubCategoriesForAdministrator(adminId, category);
 
             CollectionAssert.AreEqual(expectedSubcategoriesList, result);
+        }
+    }
+
+    [TestClass]
+    public class TablesTests
+    {
+        private const string ConnectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=12345678;";
+
+        [TestMethod]
+        public void FillTables_ShouldInsertData()
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
+            {
+                Tables tables = new Tables();
+                tables.Fill_Tables();
+            }
+        }
+
+
+        [TestClass]
+        public class ImageConverterTests
+        {
+            [TestMethod]
+            public void ConvertImageToByteArray_ShouldConvertImage()
+            {
+                string imagePath = "./icons/goods.png";
+                ImageFormat format = ImageFormat.Png;
+
+                byte[] result = ImageConverter.ConvertImageToByteArray(imagePath, format);
+
+                Assert.IsNotNull(result);
+                Assert.IsTrue(result.Length > 0);
+            }
         }
     }
 }

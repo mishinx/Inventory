@@ -24,12 +24,11 @@ namespace DB_Setup
                     //FillOperatorsTable(connection, 1);
 
 
-                    Console.WriteLine("Данi успiшно доданi до бази даних.");
-                    Console.WriteLine("Натиснiть будь-яку клавiшу для друку даних з таблиць...");
-                    Console.ReadKey();
-                    Console.WriteLine("");
+                    //Console.WriteLine("Данi успiшно доданi до бази даних.");
+                    //Console.WriteLine("Натиснiть будь-яку клавiшу для друку даних з таблиць...");
+                    //Console.ReadKey();
+                    //Console.WriteLine("");
                 }
-
 
                 static void FillAdministratorsTable(NpgsqlConnection connection, int count)
                 {
