@@ -9,7 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using Serilog;
 
 namespace Wpf_Inventarium
 {
@@ -22,6 +24,9 @@ namespace Wpf_Inventarium
         OperatorRepository operator_repo = new OperatorRepository();
         WarehouseRepository warehouse_repo = new WarehouseRepository();
         GoodsRepository goods_repo = new GoodsRepository();
+        private bool isMenuOpen = true;
+        private bool isFilterOpen = true;
+        ILogger _logger = LoggerManager.Instance.Logger;
 
         public MainWindowEmployees()
         {
@@ -33,30 +38,102 @@ namespace Wpf_Inventarium
             List<Operator> operator_employees = operator_service.GetAllOperatorsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
             List<Administrator> admin_employees = admin_service.GetAdministratorsByCompanyName(admin_service.GetAdministratorByEmail(MainWindow.username).company_name);
 
-            foreach (var admin in admin_employees)
-            {
-                if (admin.email_address != MainWindow.username)
-                {
-                    AddEmployeesGrid(admin);
-                }
-            }
-
-            foreach (var @operator in operator_employees)
-            {
-                AddEmployeesGrid(@operator);
-            }
+            DisplayEmployees(admin_employees.Cast<IEmployee>().ToList());
+            DisplayEmployees(operator_employees.Cast<IEmployee>().ToList());
             this.MinWidth = 816;
             this.MinHeight = 470;
         }
+        private void MenuClick(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
 
+            if (isMenuOpen)
+            {
+                Anim.From = 0;
+                Anim.To = 380;
+            }
+
+            isMenuOpen = !isMenuOpen;
+            MenuPopup.BeginAnimation(HeightProperty, Anim);
+        }
+
+        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!isMenuOpen && !IsMouseOverPopup(e.GetPosition(MenuPopup)) && !MenuButton.IsMouseOver)
+            {
+                CloseMenu();
+            }
+            if (!isFilterOpen && !IsMouseOverFilterPopup(e.GetPosition(FilterPopup)) && !ButtonFilter.IsMouseOver)
+            {
+                CloseFilter();
+            }
+        }
+
+        private bool IsMouseOverPopup(Point mousePosition)
+        {
+            Point popupPosition = MenuPopup.PointToScreen(new Point(0, 0));
+
+            Rect popupRect = new Rect(popupPosition.X, popupPosition.Y, MenuPopup.ActualWidth, MenuPopup.ActualHeight);
+
+            return popupRect.Contains(mousePosition);
+        }
+
+        private void CloseMenu()
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+            Anim.From = 380;
+            Anim.To = 0;
+            isMenuOpen = !isMenuOpen;
+            MenuPopup.BeginAnimation(HeightProperty, Anim);
+        }
+        private void FilterClick(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+
+            if (isFilterOpen)
+            {
+                Anim.From = 0;
+                Anim.To = 143;
+            }
+
+            isFilterOpen = !isFilterOpen;
+            FilterPopup.BeginAnimation(WidthProperty, Anim);
+        }
+
+        private bool IsMouseOverFilterPopup(Point mousePosition)
+        {
+            Point popupPosition = FilterPopup.PointToScreen(new Point(0, 0));
+
+            Rect popupRect = new Rect(popupPosition.X, popupPosition.Y, FilterPopup.ActualWidth, FilterPopup.ActualHeight);
+
+            return popupRect.Contains(mousePosition);
+        }
+
+        private void CloseFilter()
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+            Anim.From = 143;
+            Anim.To = 0;
+            isFilterOpen = !isFilterOpen;
+            FilterPopup.BeginAnimation(WidthProperty, Anim);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MenuPopup.IsOpen = true;
+            FilterPopup.IsOpen = true;
+        }
         private void Window_Closed(object sender, System.EventArgs e)
         {
             Close();
-        }
-
-        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            MenuPopup.IsOpen = true;
         }
 
         private void buttonHomePage_Click(object sender, RoutedEventArgs e)
@@ -65,44 +142,26 @@ namespace Wpf_Inventarium
             win.Height = this.ActualHeight;
             win.Width = this.ActualWidth;
             win.Show();
-            Close();
-            CloseMenu();
+            Close();           
         }
 
         private void buttonYourProfile_Click(object sender, RoutedEventArgs e)
         {
             EditProfileAdminWindow win = new EditProfileAdminWindow();
-            win.Show();
-            CloseMenu();
+            win.Show();            
         }
 
         private void buttonEmployes_Click(object sender, RoutedEventArgs e)
-        {
-            CloseMenu();
+        {            
         }
-
+        
         private void buttonSettings_Click(object sender, RoutedEventArgs e)
         {
+            _logger.Information("Користувач " + MainWindow.username + " вийшов з профілю");
             MainWindow win = new MainWindow();
             win.Show();
-            Close();
-            CloseMenu();
-        }
-
-        private void CloseMenu()
-        {
-            MenuPopup.IsOpen = false;
-        }
-
-        private void CloseMenuFilter()
-        {
-            FilterPopup.IsOpen = false;
-        }
-
-        private void ToggleButtonFilter_Checked(object sender, RoutedEventArgs e)
-        {
-            FilterPopup.IsOpen = true;
-        }
+            Close();            
+        }        
 
         private void buttonFromAtoZ_Click(object sender, RoutedEventArgs e)
         {
@@ -117,8 +176,6 @@ namespace Wpf_Inventarium
             var sortedOperators = operators.OrderBy(a => a.full_name).Cast<IEmployee>().ToList();
             DisplayEmployees(sortedAdmins);
             DisplayEmployees(sortedOperators);
-
-            CloseMenuFilter();
         }
 
         private void buttonFromZtoA_Click(object sender, RoutedEventArgs e)
@@ -134,7 +191,6 @@ namespace Wpf_Inventarium
             var sortedOperators = operators.OrderByDescending(a => a.full_name).Cast<IEmployee>().ToList();
             DisplayEmployees(sortedAdmins);
             DisplayEmployees(sortedOperators);
-            CloseMenuFilter();
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)

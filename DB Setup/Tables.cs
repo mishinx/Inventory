@@ -8,14 +8,14 @@ namespace DB_Setup
     {
         public void Fill_Tables()
         {
-            string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=bochka2004;";
+            string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=12345678;";
             try
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    //FillAdministratorsTable(connection, 50);
+                    FillAdministratorsTable(connection, 1);
 
                     //FillWarehousesTable(connection, 50);
 
@@ -24,12 +24,11 @@ namespace DB_Setup
                     //FillOperatorsTable(connection, 1);
 
 
-                    Console.WriteLine("Данi успiшно доданi до бази даних.");
-                    Console.WriteLine("Натиснiть будь-яку клавiшу для друку даних з таблиць...");
-                    Console.ReadKey();
-                    Console.WriteLine("");
+                    //Console.WriteLine("Данi успiшно доданi до бази даних.");
+                    //Console.WriteLine("Натиснiть будь-яку клавiшу для друку даних з таблиць...");
+                    //Console.ReadKey();
+                    //Console.WriteLine("");
                 }
-
 
                 static void FillAdministratorsTable(NpgsqlConnection connection, int count)
                 {
@@ -125,7 +124,7 @@ namespace DB_Setup
 
         public void Print_Tables()
         {
-            string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=bochka2004;";
+            string connectionString = "Host=localhost;Port=5432;Database=inventarium;Username=postgres;Password=12345678;";
 
             try
             {

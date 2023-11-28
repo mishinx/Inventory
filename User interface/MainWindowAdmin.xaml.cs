@@ -9,7 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using Serilog;
 
 namespace Wpf_Inventarium
 {
@@ -20,36 +22,125 @@ namespace Wpf_Inventarium
     {
         AdministratorRepository admin_repo = new AdministratorRepository();
         GoodsRepository goods_repo = new GoodsRepository();
+        private bool isMenuOpen = true;
+        private bool isFilterOpen = true;
+        ILogger _logger = LoggerManager.Instance.Logger;
 
         public MainWindowAdmin()
         {
             InitializeComponent();
+            
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             if (goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id) != null)
             {
                 List<Goods> allGoods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
 
-                foreach (var goods in allGoods)
-                {
-                    AddGoodsGrid(goods);
-                }
+               DisplayGoods(allGoods);
             }
 
             this.MinWidth = 816;
             this.MinHeight = 470;
         }
 
-        private void HomePageButton_Click(object sender, RoutedEventArgs e)
+        private void MenuClick(object sender, RoutedEventArgs e)
         {
-            CloseMenu();
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+
+            if (isMenuOpen)
+            {
+                Anim.From = 0;
+                Anim.To = 380;
+            }
+
+            isMenuOpen = !isMenuOpen;
+            MenuPopup.BeginAnimation(HeightProperty, Anim);
+        }
+        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!isMenuOpen && !IsMouseOverPopup(e.GetPosition(MenuPopup)) && !MenuButton.IsMouseOver)
+            {
+                CloseMenu();
+            }
+            if (!isFilterOpen && !IsMouseOverFilterPopup(e.GetPosition(FilterPopup)) && !ButtonFilter.IsMouseOver)
+            {
+                CloseFilter();
+            }
+        }
+
+        private bool IsMouseOverPopup(Point mousePosition)
+        {
+            Point popupPosition = MenuPopup.PointToScreen(new Point(0, 0));
+
+            Rect popupRect = new Rect(popupPosition.X, popupPosition.Y, MenuPopup.ActualWidth, MenuPopup.ActualHeight);
+
+            return popupRect.Contains(mousePosition);
+        }
+
+        private void CloseMenu()
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+            Anim.From = 380;
+            Anim.To = 0;
+            isMenuOpen = !isMenuOpen;
+            MenuPopup.BeginAnimation(HeightProperty, Anim);
+        }
+
+        private void FilterClick(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+
+            if (isFilterOpen)
+            {
+                Anim.From = 0;
+                Anim.To = 143;
+            }
+
+            isFilterOpen = !isFilterOpen;
+            FilterPopup.BeginAnimation(WidthProperty, Anim);
+        }
+
+        private bool IsMouseOverFilterPopup(Point mousePosition)
+        {
+            Point popupPosition = FilterPopup.PointToScreen(new Point(0, 0));
+
+            Rect popupRect = new Rect(popupPosition.X, popupPosition.Y, FilterPopup.ActualWidth, FilterPopup.ActualHeight);
+
+            return popupRect.Contains(mousePosition);
+        }
+
+        private void CloseFilter()
+        {
+            DoubleAnimation Anim = new DoubleAnimation();
+            Anim.Duration = TimeSpan.FromSeconds(1);
+            Anim.EasingFunction = new QuadraticEase();
+            Anim.From = 143;
+            Anim.To = 0;
+            Anim.FillBehavior = FillBehavior.Stop;
+            isFilterOpen = !isFilterOpen;
+            FilterPopup.BeginAnimation(WidthProperty, Anim);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MenuPopup.IsOpen = true;
+            FilterPopup.IsOpen = true;
+        }
+
+        private void HomePageButton_Click(object sender, RoutedEventArgs e)
+        {            
         }
 
         private void OwnInformationButton_Click(object sender, RoutedEventArgs e)
         {
             EditProfileAdminWindow win = new EditProfileAdminWindow();
-            win.Show();
-            CloseMenu();
+            win.Show();            
         }
 
         private void EmployeesButton_Click(object sender, RoutedEventArgs e)
@@ -58,31 +149,15 @@ namespace Wpf_Inventarium
             win.Height = this.ActualHeight;
             win.Width = this.ActualWidth;
             win.Show();
-            Close();
-            CloseMenu();
+            Close();            
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
+            _logger.Information("Користувач " + MainWindow.username + " вийшов з профілю");
             MainWindow win = new MainWindow();
             win.Show();
-            Close();
-            CloseMenu();
-        }
-
-        private void CloseMenu()
-        {
-            MenuPopup.IsOpen = false;
-        }
-
-        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            MenuPopup.IsOpen = true;
-        }
-
-        private void CloseMenuFilter()
-        {
-            FilterPopup.IsOpen = false;
+            Close();            
         }
 
         private void buttonFromAtoZ_Click(object sender, RoutedEventArgs e)
@@ -90,8 +165,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderBy(g => g.full_name).ToList());
-            CloseMenuFilter();
+            DisplayGoods(goods.OrderBy(g => g.full_name).ToList());            
         }
 
         private void buttonCountFromLess_Click(object sender, RoutedEventArgs e)
@@ -99,8 +173,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderBy(g => g.quantity).ToList());
-            CloseMenuFilter();
+            DisplayGoods(goods.OrderBy(g => g.quantity).ToList());            
         }
 
         private void buttonPriceFromLess_Click(object sender, RoutedEventArgs e)
@@ -108,8 +181,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderBy(g => g.price).ToList());
-            CloseMenuFilter();
+            DisplayGoods(goods.OrderBy(g => g.price).ToList());            
         }
 
         private void buttonFromZtoA_Click(object sender, RoutedEventArgs e)
@@ -117,8 +189,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());
-            CloseMenuFilter();
+            DisplayGoods(goods.OrderByDescending(g => g.full_name).ToList());            
         }
 
         private void buttonCountFromMore_Click(object sender, RoutedEventArgs e)
@@ -126,8 +197,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderByDescending(g => g.quantity).ToList());
-            CloseMenuFilter();
+            DisplayGoods(goods.OrderByDescending(g => g.quantity).ToList());            
         }
 
         private void buttonPriceFromMore_Click(object sender, RoutedEventArgs e)
@@ -135,8 +205,7 @@ namespace Wpf_Inventarium
             GoodsService goods_service = new GoodsService(goods_repo);
             AdministratorService admin_service = new AdministratorService(admin_repo);
             List<Goods> goods = goods_service.GetAllGoodsForAdministrator(admin_service.GetAdministratorByEmail(MainWindow.username).admin_id);
-            DisplayGoods(goods.OrderByDescending(g => g.price).ToList());
-            CloseMenuFilter();
+            DisplayGoods(goods.OrderByDescending(g => g.price).ToList());            
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -146,11 +215,6 @@ namespace Wpf_Inventarium
             {
                 textBox.Text = string.Empty;
             }
-        }
-
-        private void ToggleButtonFilter_Checked(object sender, RoutedEventArgs e)
-        {
-            FilterPopup.IsOpen = true;
         }
 
         private void SearchTextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -401,7 +465,6 @@ namespace Wpf_Inventarium
             gridObject.Margin = new Thickness(0, 15, 0, 0);
 
             PanelGoods.Children.Add(gridObject);
-
         }
 
         private ImageSource ConvertByteArrayToImage(byte[] byteArrayIn)
